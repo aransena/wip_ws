@@ -50,7 +50,7 @@
 
 				<plugin name="laser" filename="libgazebo_ros_laser.so">
 					<topicName>/scan</topicName>
-					<frameName>laser_frame</frameName> 
+					<frameName>base_laser</frameName> 
 					<alwaysOn>true</alwaysOn>
 					<updateRate>20.0</updateRate>
 				</plugin>

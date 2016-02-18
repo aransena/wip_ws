@@ -289,7 +289,7 @@
         <commandTopic>cmd_vel</commandTopic>
         <odometryTopic>odom</odometryTopic>
         <odometryFrame>odom</odometryFrame>
-        <robotBaseFrame>base_frame</robotBaseFrame>
+        <robotBaseFrame>base_link</robotBaseFrame>
 </plugin>
 
 

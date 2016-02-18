@@ -1,2 +1,2 @@
-wip_gazebo
+wip_gazebo:wip_tf
 -DCATKIN_DEVEL_PREFIX=/home/clm/Aran/wip_ws/devel -DCMAKE_INSTALL_PREFIX=/home/clm/Aran/wip_ws/install
