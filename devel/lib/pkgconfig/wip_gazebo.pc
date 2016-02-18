@@ -1,0 +1,8 @@
+prefix=/home/clm/Aran/wip_ws/devel
+
+Name: wip_gazebo
+Description: Description of wip_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/clm/Aran/wip_ws/devel/lib 
+Requires: 

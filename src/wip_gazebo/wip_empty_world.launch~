@@ -1,0 +1,8 @@
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+	<param name="robot_model" textfile="/home/clm/.gazebo/models/wip/model.sdf" />
+	<node name="spawn_robot1" pkg="gazebo" type="spawn_model" args="-gazebo -param robot_model -model wip" respawn="false" output="screen" />
+    <!-- more default parameters can be changed here -->
+  </include>
+</launch>
