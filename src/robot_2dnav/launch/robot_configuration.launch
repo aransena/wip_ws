@@ -1,5 +1,5 @@
 <launch>
-	<include file="$(find openni2_launch)/launch/openni2.launch"/>
+	<include file="$(find freenect_launch)/launch/freenect.launch"/>
 	<include file="$(find hokuyo_node)/hokuyo_test.launch"/>
 	<include file="$(find tf_tree)/launch/tf_broadcaster.launch"/>
 </launch>

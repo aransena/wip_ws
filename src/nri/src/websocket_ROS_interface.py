@@ -101,10 +101,10 @@ def get_twist_msg(data, twist_mem):
 def watch_interface(json_str, twist_mem):
     data = json.loads(json_str.data)
     #print "here"
-    # pub = rospy.Publisher('cmd_vel', Twist)
+    pub = rospy.Publisher('cmd_vel', Twist)
     # pub = rospy.Publisher('robbie/cmd_vel', Twist)
     #pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
-    pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
+    #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
 
     twist = Twist()
 

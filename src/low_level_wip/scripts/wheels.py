@@ -56,7 +56,7 @@ def wheelsOdomSendCmd():
 		try:
 			roboclaw.Open(port,115200)#/dev/roboclaw_wheels
 			break
-		except:
+		except Exception as e:
 			if time.time()-start_connect > 60:
 				rospy.logfatal("failed to connect to wheels motor driver")
 				TIMEOUT=True
