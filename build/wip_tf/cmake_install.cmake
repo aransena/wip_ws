@@ -1,8 +1,8 @@
-# Install script for directory: /home/clm/Aran/wip_ws/src/wip_tf
+# Install script for directory: /home/itx2/wip_ws/src/wip_tf
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "/home/clm/Aran/wip_ws/install")
+  SET(CMAKE_INSTALL_PREFIX "/home/itx2/wip_ws/install")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/clm/Aran/wip_ws/build/wip_tf/catkin_generated/installspace/wip_tf.pc")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/itx2/wip_ws/build/wip_tf/catkin_generated/installspace/wip_tf.pc")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wip_tf/cmake" TYPE FILE FILES
-    "/home/clm/Aran/wip_ws/build/wip_tf/catkin_generated/installspace/wip_tfConfig.cmake"
-    "/home/clm/Aran/wip_ws/build/wip_tf/catkin_generated/installspace/wip_tfConfig-version.cmake"
+    "/home/itx2/wip_ws/build/wip_tf/catkin_generated/installspace/wip_tfConfig.cmake"
+    "/home/itx2/wip_ws/build/wip_tf/catkin_generated/installspace/wip_tfConfig-version.cmake"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wip_tf" TYPE FILE FILES "/home/clm/Aran/wip_ws/src/wip_tf/package.xml")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wip_tf" TYPE FILE FILES "/home/itx2/wip_ws/src/wip_tf/package.xml")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

@@ -1,0 +1,18 @@
+# For a direct USB cable connection, the port name is typically
+# /dev/ttyACM# where is # is a number such as 0, 1, 2, etc
+# For a wireless connection like XBee, the port is typically
+# /dev/ttyUSB# where # is a number such as 0, 1, 2, etc.
+
+
+#constants for wheels
+port_wheels_motordriver: /dev/roboclaw_wheels
+baud: 115200
+drive_wheel_circumference: 0.4
+distance_between_wheels: 0.5
+wheel_encoder_ticks_per_revolution: 8192.0 
+address_wheels_motordriver: 128
+base_frame: base_link
+
+
+
+

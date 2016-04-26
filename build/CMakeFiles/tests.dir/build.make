@@ -31,11 +31,14 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/clm/Aran/wip_ws/src
+CMAKE_SOURCE_DIR = /home/itx2/wip_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/clm/Aran/wip_ws/build
+CMAKE_BINARY_DIR = /home/itx2/wip_ws/build
 
 # Utility rule file for tests.
 
@@ -57,6 +60,6 @@ CMakeFiles/tests.dir/clean:
 .PHONY : CMakeFiles/tests.dir/clean
 
 CMakeFiles/tests.dir/depend:
-	cd /home/clm/Aran/wip_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/clm/Aran/wip_ws/src /home/clm/Aran/wip_ws/src /home/clm/Aran/wip_ws/build /home/clm/Aran/wip_ws/build /home/clm/Aran/wip_ws/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/itx2/wip_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/itx2/wip_ws/src /home/itx2/wip_ws/src /home/itx2/wip_ws/build /home/itx2/wip_ws/build /home/itx2/wip_ws/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/tests.dir/depend
 

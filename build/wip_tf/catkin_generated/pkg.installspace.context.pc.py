@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "wip_tf"
-PROJECT_SPACE_DIR = "/home/clm/Aran/wip_ws/install"
+PROJECT_SPACE_DIR = "/home/itx2/wip_ws/install"
 PROJECT_VERSION = "0.0.0"

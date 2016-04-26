@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+import time
+import random 
+
+import roslib; roslib.load_manifest('smach_tutorials')
+import rospy
+import smach
+import smach_ros
+import threading
+import learning_actionlib.msg as FA
+
+from smach_ros import SimpleActionState 
+from smach_ros import ServiceState
+from std_msgs.msg import String
+
+import FB_Navigation_States as states
+import move_base_msgs.msg as MB
+
+
+print "Hello"
+
+
+##### main #####
+
+def main():
+	rospy.init_node('FB1_state_machine')
+	random.seed()
+	#smach state machine
+	sm = smach.StateMachine(outcomes=['task_success','task_fail', 'task_error'])
+
+	sm.userdata.sm_current_goal= MB.MoveBaseGoal()
+	sm.userdata.sm_nav_goal= MB.MoveBaseGoal()
+	sm.userdata.sm_request_goal= True
+
+	goal = FA.FibonacciGoal(order=3)
+	#open container
+	with sm:
+		smach.StateMachine.add('S0_READ', states.read_rsbb(), transitions={'proceed':'S1_CALIBRATE',
+																	'error':'ERR'})
+
+		smach.StateMachine.add('S1_CALIBRATE', states.calibration(), transitions= {'proceed':'S2_SET_GOAL',
+																			'error':'ERR'})
+
+		smach.StateMachine.add('S2_SET_GOAL', states.set_goal(), transitions= {'new_goal':'S3_NAVIGATE',
+																		'no_more_goals':'S5_CLEANUP',
+																		'error':'ERR'},
+																 remapping={'read_request_goal':'sm_request_goal',
+																 			'send_nav_goal':'sm_nav_goal'})
+
+		smach.StateMachine.add('S3_NAVIGATE', states.navigate(), transitions= {'goal_reached':'S2_SET_GOAL',
+																		'goal_unachievable':'S4_CARROT', 
+																		'error':'ERR'},
+																 remapping={'read_nav_goal':'sm_nav_goal',
+																 			'send_request_goal':'sm_request_goal',
+																 			'send_current_goal':'sm_current_goal'})
+
+		smach.StateMachine.add('S4_CARROT', states.carrot(), transitions= {'new_temp_goal':'S3_NAVIGATE', 
+																	'error':'ERR'})
+
+		smach.StateMachine.add('S5_CLEANUP',states.cleanup(), transitions= {'success_end':'task_success',
+																			'fail_end':'task_fail',
+																			'error':'ERR'}) 
+
+		smach.StateMachine.add('ERR', states.error_handler(), transitions={'exit':'task_error'}) # error handling state
+
+		#smach.StateMachine.add('FIB', SimpleActionState('fibonacci',FA.FibonacciAction,goal=goal),transitions={'succeeded':'CONCURRENT','preempted':'CONCURRENT','aborted':'CONCURRENT'})
+		
+		
+	sis = smach_ros.IntrospectionServer('server_name', sm, '/SM_ROOT')
+   	sis.start()
+
+	#execute SM
+	outcome=sm.execute()
+	print "result: ", outcome
+	rospy.spin()
+	sis.stop()
+
+if __name__=='__main__':
+	main()
+

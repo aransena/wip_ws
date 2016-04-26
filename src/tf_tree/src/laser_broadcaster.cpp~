@@ -1,0 +1,25 @@
+#include <ros/ros.h>
+#include <tf/transform_broadcaster.h> // from ROS Indigo shared
+#include "std_msgs/Float32.h"
+
+int main(int argc, char** argv){
+	float z = 0.0;
+	ros::init(argc, argv, "laser_publisher_tf");
+	ros::NodeHandle n;
+
+	ros::Rate r(10);
+
+	tf::TransformBroadcaster broadcaster;
+	
+
+	while(n.ok()){
+
+		broadcaster.sendTransform(
+			tf::StampedTransform(
+				tf::Transform(tf::Quaternion(0.0,0.0,z,1),  		//transform does not need to rotate the sensor
+					tf::Vector3(0.372,0.0,0)),					//trasform DOES need to translate the sensor (x,y,z)
+				ros::Time::now(),"hip_link", "laser_link"));
+				//printf("okay\n");
+		r.sleep();
+	}
+}

@@ -1,8 +1,8 @@
-prefix=/home/clm/Aran/wip_ws/install
+prefix=/home/itx2/wip_ws/install
 
 Name: wip_tf
 Description: Description of wip_tf
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/clm/Aran/wip_ws/install/lib 
+Libs: -L/home/itx2/wip_ws/install/lib 
 Requires: 

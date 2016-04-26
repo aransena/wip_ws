@@ -1,0 +1,12 @@
+<launch>
+	<node pkg="robot_setup_sensors" type="sensor_node_type" name="sensors_node" output="screen">
+		<param name="sensors_param" value="param_value" />
+	</node>
+
+	<node pkg="robot_setup_tf" type="tf_node_type" name="tf_node" output="screen">
+		<param name="tf_param" value="param_value" />
+	</node>
+
+</launch>
+
+	

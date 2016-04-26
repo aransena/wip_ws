@@ -1,2 +1,2 @@
-wip_gazebo:wip_tf
--DCATKIN_DEVEL_PREFIX=/home/clm/Aran/wip_ws/devel -DCMAKE_INSTALL_PREFIX=/home/clm/Aran/wip_ws/install
+low_level_wip:robot_2dnav:robot_setup_sensors:tcd_fb2:template_ros:template_sm:tf_tree:wip_gazebo:wip_tf
+-DCATKIN_DEVEL_PREFIX=/home/itx2/wip_ws/devel -DCMAKE_INSTALL_PREFIX=/home/itx2/wip_ws/install -G Unix Makefiles

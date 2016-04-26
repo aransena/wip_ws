@@ -1,0 +1,121 @@
+#!/usr/bin/env python
+import time
+import random 
+import rospy
+import smach
+import smach_ros
+import actionlib
+import FB2
+
+from roah_rsbb_comm_ros.msg import BenchmarkState
+from std_srvs.srv import Empty
+from std_msgs.msg import UInt32
+
+benchState=BenchmarkState.STOP
+
+def wait_start_cb(data):
+    global benchState
+    benchState=data.benchmark_state
+    print "CB!!!! ", benchState
+        
+
+class wait_start(smach.State):
+	def __init__(self):
+		smach.State.__init__(self,outcomes=['wait','proceed','error'])
+
+           #return data
+	def execute(self, userdata):
+            time.sleep(1)
+            rospy.loginfo('Executing S0_WAIT_START')
+            try:
+                
+                #rospy.Subscriber("/roah_rsbb/benchmark/state", BenchmarkState,wait_start_cb)
+                data=rospy.wait_for_message("/roah_rsbb/benchmark/state",BenchmarkState)
+                benchState=data.benchmark_state
+                print "Data: ", benchState
+                
+                if benchState==BenchmarkState.STOP:
+                    print "STOP"
+                    return 'wait'
+                elif benchState==BenchmarkState.PREPARE:
+                    print "PREPARE"
+                    return 'proceed'
+                else:
+                    print "ERROR ", benchState
+                    return 'error'
+                
+            except Exception,e:
+                print "ERROR: ",str(e)
+                return 'error'
+            
+
+class prepare(smach.State):
+	def __init__(self):
+		smach.State.__init__(self,outcomes=['proceed','error'])
+
+	def execute(self, userdata):
+		rospy.loginfo('Executing S1_PREPARE')
+		time.sleep(1)
+                try:
+                    end_prep=rospy.ServiceProxy('/roah_rsbb/end_prepare',Empty)
+                    end_prep()
+                    return 'proceed'
+                except Exception,e:
+                    print "ERROR: ", str(e)
+                    return 'error'
+		
+            
+class wait_execute(smach.State):
+	def __init__(self):
+		smach.State.__init__(self,outcomes=['wait','proceed','error'])
+
+	def execute(self, userdata):
+            rospy.loginfo('Executing S2_WAIT_EXECUTE')
+            time.sleep(1)
+            try:
+                data=rospy.wait_for_message("/roah_rsbb/benchmark/state",BenchmarkState)
+                benchState=data.benchmark_state
+
+                print "Data: ", benchState
+                
+                if benchState==BenchmarkState.EXECUTE:
+                    print "EXECUTE"
+                    return 'proceed'
+                elif benchState==BenchmarkState.STOP:
+                    print "STOP"
+                    return 'error'
+                elif benchState==BenchmarkState.PREPARE:
+                    print "PREPARE"
+                    return 'wait'
+                else:
+                    print "ERROR ", benchState
+                    return 'error'
+                
+            except Exception,e:
+                print "ERROR: ",str(e)
+                return 'error'
+            
+class start_task(smach.State):
+    def __init__(self):
+        smach.State.__init__(self,outcomes=['proceed','error'])
+
+    def execute(self, userdata):
+<<<<<<< HEAD
+        rospy.loginfo('Executing S3_START_LOG')
+=======
+        rospy.loginfo('Executing S3_START_TASK')
+>>>>>>> 4c8884206035f41d76c99556dad2f3b768c79d3d
+        pub = rospy.Publisher('/roah_rsbb/messages_saved',UInt32,queue_size=1)
+        outcome=FB2.run_FB2()
+        #end_exec=rospy.ServiceProxy('/roah_rsbb/end_execute',Empty)
+        #end_exec()
+        return 'proceed'
+
+class error_cleanup(smach.State):
+	def __init__(self):
+		smach.State.__init__(self,outcomes=['proceed','error'])
+
+	def execute(self, userdata):
+		rospy.loginfo('Executing ERR')
+		time.sleep(3)
+		return 'proceed'

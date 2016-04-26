@@ -1,0 +1,37 @@
+<launch>
+	
+	<!-- Start ros master if required -->
+	<master auto="start"/>
+
+
+	<!-- Run the map server -->
+<<<<<<< HEAD
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find robot_2dnav)/maps/temp_map.yaml"/>
+=======
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find my_map_package)/map.pgm map_resolution"/>
+>>>>>>> 4c8884206035f41d76c99556dad2f3b768c79d3d
+
+
+	<!-- Run AMCL -->
+	<include file="$(find amcl)/examples/amcl_diff.launch" />
+
+
+	<!-- Load Parameters -->
+	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+		<rosparam file="$(find robot_2dnav)/params/costmap_common_params.yaml" command="load" ns="global_costmap" />
+		<rosparam file="$(find robot_2dnav)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
+<<<<<<< HEAD
+		<rosparam file="$(find robot_2dnav)/params/local_costmap_params.yaml" command="load"/>
+		<rosparam file="$(find robot_2dnav)/params/global_costmap_params.yaml" command="load"/>
+		<rosparam file="$(find robot_2dnav)/params/base_local_planner_params.yaml" command="load"/>
+		<param name="controller_frequency" value="20" type="double"/>
+		<param name="oscillation_reset_dist" value="0.01" type="double"/>
+=======
+		<rosparam file="$(find robot_2dnav)/params/local_costmap_params.yaml" command="load" />
+		<rosparam file="$(find robot_2dnav)/params/global_costmap_params.yaml" command="load" />
+		<rosparam file="$(find robot_2dnav)/params/base_local_planner_params.yaml" command="load" />
+>>>>>>> 4c8884206035f41d76c99556dad2f3b768c79d3d
+	</node>
+
+	
+</launch>

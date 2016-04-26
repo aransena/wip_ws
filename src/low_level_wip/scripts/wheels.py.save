@@ -1,0 +1,256 @@
+#! /usr/bin/env python
+# license
+
+import roboclaw
+import rospy
+import string
+
+import roslib; roslib.load_manifest('low_level_wip')
+from math import sin, cos, pi
+from geometry_msgs.msg import Quaternion, Twist, Pose
+from nav_msgs.msg import Odometry
+from tf.broadcaster import TransformBroadcaster
+
+linearVelocityCmd=0
+angularVelocityCmd=0
+lastCmdVelTime=0
+
+
+def wheelsOdomSendCmd():
+
+	global linearVelocityCmd
+	global angularVelocityCmd
+	global lastCmdVelTime
+	
+	
+	pubOdom=rospy.Publisher('odom', Odometry, queue_size=2)
+	pubOdomBroadcaster = TransformBroadcaster()
+	rospy.init_node('wheels', anonymous = True)
+	rate =rospy.Rate(200)
+	lastCmdVelTime=rospy.Time.now()
+
+	wheelBase=rospy.get_param("~distance_between_wheels")
+	ticksPerRev=rospy.get_param("~wheel_encoder_ticks_per_revolution")
+	wheelCircumference=rospy.get_param("~drive_wheel_circumference")
+	
+	baseFrame=rospy.get_param("~base_frame")
+	port=(rospy.get_param("~port_wheels_motordriver"))
+	address=rospy.get_param("~address_wheels_motordriver",0X80)
+	sendToMDRate=rospy.get_param("~rate_to_send_cmd_vel_to_motor_driver",30.0)
+	nseconds=1000000000/sendToMDRate
+	timeBetweenMDCMD=rospy.Duration(0, nseconds)
+	MDtime=rospy.Time.now()
+
+	
+
+	
+
+	metersToTicks=ticksPerRev/wheelCircumference
+	ticksToMeters=wheelCircumference/ticksPerRev
+
+	#establish connection to Motor driver
+	try:
+		roboclaw.Open(port,115200)#/dev/ACM0
+	except rospy.ROSInterruptException:
+		rospy.logfatal("failed to connect to wheels motor driver")
+		pass
+
+
+
+	version = roboclaw.ReadVersion(address)
+	if version[0]==False:
+		rospy.logfatal("get version of wheel motor driver failed")
+	else:
+		 repr(version[1])
+
+	roboclaw.ResetEncoders(address)#set encoder values to 0
+	#rospy.sleep(0.01);#otherwise encoder doesn't count
+	roboclaw.SpeedM1M2(address,0,0)#set motor speed to 0
+
+
+	lastLeftDistance=0.0
+	lastRightDistance=0.0
+	lastLeftSpeed=0.0
+	lastRightSpeed=0.0
+	yaw=0.0
+	positionX=0
+	positionY=0
+	
+
+	#setup subscriber
+	rospy.Subscriber("/cmd_vel", Twist, cmdVelCallback)
+	seconds=rospy.Time()
+
+	while not rospy.is_shutdown():
+		now = rospy.Time.now()
+		try:
+			lt=roboclaw.ReadEncM1(address)
+			rt=roboclaw.ReadEncM2(address)
+			ls=roboclaw.ReadSpeedM1(address)
+			rs=roboclaw.ReadSpeedM1(address)
+
+		except:
+			version = roboclaw.ReadVersion(address)
+			while version[0]==False:
+
+				try:
+					roboclaw.Open(port,115200)#/dev/roboclaw_wheels
+				except rospy.ROSInterruptException:
+					rospy.logwarn("failed to connect to wheels motor driver again afer it disconeced")
+				pass
+			rospy.sleep(0.05)
+
+
+
+
+
+
+		
+		leftDistance=lt[1]*ticksToMeters
+		rightDistance=rt[1]*ticksToMeters
+		leftSpeed=ls[1]*ticksToMeters
+		rightSpeed=rs[1]*ticksToMeters
+
+		#rospy.loginfo(" Left distance %d right distance %d", lt[1], rt[1])
+
+
+	
+
+		dLeftDistance=leftDistance-lastLeftDistance
+		dRightDistance=rightDistance-lastRightDistance
+		rotation=(dRightDistance-dLeftDistance)/wheelBase
+		
+
+		dLeftSpeed=leftSpeed-lastLeftSpeed
+		dRightSpeed=rightSpeed-lastRightSpeed
+		rotationSpeed=(dRightSpeed-dLeftSpeed)/wheelBase
+
+		averageDistance=(dRightDistance+dLeftDistance)/2.0
+		averageVelocity=(dRightSpeed+dLeftSpeed)/2.0
+
+		lastLeftDistance=leftDistance
+		lastRightDistance=rightDistance
+		lastLeftSpeed=leftSpeed
+		lastRightDistance=rightDistance
+
+		if (averageDistance !=0) :
+			dx=cos(rotation)*averageDistance
+			dy=-sin(rotation)*averageDistance
+			positionX += cos(yaw)*dx-sin(yaw)*dy
+			positionY +=sin(yaw)*dx+cos(yaw)*dy
+
+		if(rotation != 0):
+			yaw+=rotation
+
+		quaternion=Quaternion()
+		quaternion.x=0.0
+		quaternion.y=0.0
+		quaternion.z=sin(yaw/2.0)
+		quaternion.w=cos(yaw/2.0)
+
+		# Create the odometry transform frame broadcaster.
+		pubOdomBroadcaster.sendTransform(
+			(positionX, positionY, 0),
+			(quaternion.x, quaternion.y, quaternion.z, quaternion.w),
+			rospy.Time.now(),
+			baseFrame,
+			"odom"
+			)
+
+		#rospy.loginfo(" linear %d angular %d", linearVelocityCmd, angularVelocityCmd)
+
+		
+		odom = Odometry()
+
+		odom.header.frame_id = "odom"
+		odom.child_frame_id = baseFrame
+		odom.header.stamp = now
+		odom.pose.pose.position.x = positionX
+		odom.pose.pose.position.y = positionY
+		odom.pose.pose.position.z = 0
+		odom.pose.pose.orientation = quaternion
+		odom.twist.twist.linear.x = averageVelocity
+
+		odom.twist.twist.linear.y = 0
+		odom.twist.twist.angular.z = rotationSpeed
+
+		pubOdom.publish(odom)
+
+
+		#get desired wheel velocities
+		
+		if (rospy.Time.now()-MDtime)>=timeBetweenMDCMD:
+			MDtime=rospy.Time.now()
+		
+			x = linearVelocityCmd        # m/s
+			th = angularVelocityCmd      # rad/s
+
+
+			if x == 0:
+				# Turn in place
+				right = th * wheelBase  / 2.0
+				left = -right
+
+			elif th == 0:
+				# Pure forward/backward motion
+				left = right = x
+			else:
+				# Rotation about a point in space
+				left = x - th * wheelBase/ 2.0
+				right = x + th * wheelBase / 2.0
+
+
+
+			left=int(left*metersToTicks)
+			right=int(right*metersToTicks)
+			
+			
+			
+			
+
+			try:
+				roboclaw.SpeedM1M2(address,left,right)
+
+			except:
+				version = roboclaw.ReadVersion(address)
+				while version[0]==False:
+
+					try:
+						roboclaw.Open(port,115200)#/dev/roboclaw_wheels
+					except rospy.ROSInterruptException:
+						rospy.logwarn("failed to connect to wheels motor driver again afer it disconeced")
+					pass
+					rospy.sleep(0.05)
+		
+		rate.sleep()
+
+
+
+
+
+	# turn off motors if ros is shutdown
+	roboclaw.SpeedM1M2(address,0,0)
+
+
+
+
+		
+def cmdVelCallback( req):
+
+	global linearVelocityCmd
+	global angularVelocityCmd
+	global lastCmdVelTime 
+	linearVelocityCmd= req.linear.x 
+	angularVelocityCmd= req.angular.z 
+	lastCmdVelTime =rospy.Time.now()
+
+
+
+if __name__ == '__main__':
+	try: 
+		wheelsOdomSendCmd()
+	except rospy.ROSInterruptException:
+		pass
+
+
+

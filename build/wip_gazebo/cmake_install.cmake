@@ -1,8 +1,8 @@
-# Install script for directory: /home/clm/Aran/wip_ws/src/wip_gazebo
+# Install script for directory: /home/itx2/wip_ws/src/wip_gazebo
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "/home/clm/Aran/wip_ws/install")
+  SET(CMAKE_INSTALL_PREFIX "/home/itx2/wip_ws/install")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/clm/Aran/wip_ws/build/wip_gazebo/catkin_generated/installspace/wip_gazebo.pc")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/itx2/wip_ws/build/wip_gazebo/catkin_generated/installspace/wip_gazebo.pc")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wip_gazebo/cmake" TYPE FILE FILES
-    "/home/clm/Aran/wip_ws/build/wip_gazebo/catkin_generated/installspace/wip_gazeboConfig.cmake"
-    "/home/clm/Aran/wip_ws/build/wip_gazebo/catkin_generated/installspace/wip_gazeboConfig-version.cmake"
+    "/home/itx2/wip_ws/build/wip_gazebo/catkin_generated/installspace/wip_gazeboConfig.cmake"
+    "/home/itx2/wip_ws/build/wip_gazebo/catkin_generated/installspace/wip_gazeboConfig-version.cmake"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wip_gazebo" TYPE FILE FILES "/home/clm/Aran/wip_ws/src/wip_gazebo/package.xml")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/wip_gazebo" TYPE FILE FILES "/home/itx2/wip_ws/src/wip_gazebo/package.xml")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
