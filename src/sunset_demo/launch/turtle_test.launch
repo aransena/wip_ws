@@ -1,0 +1,6 @@
+<launch>
+  <machine name="itx2" address="wip-itx2" env-loader="/opt/ros/indigo/env.sh" user="itx2"/>
+
+  <node machine="itx2" pkg="turtlesim" type="turtlesim_node" name="turtle" respawn="true"/>
+  
+</launch>
