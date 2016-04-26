@@ -1,8 +1,0 @@
-prefix=/home/itx2/wip_ws/install
-
-Name: wip_gazebo
-Description: Description of wip_gazebo
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/itx2/wip_ws/install/lib 
-Requires: 

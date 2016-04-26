@@ -1,7 +1,0 @@
-set(_CATKIN_CURRENT_PACKAGE "wip_tf")
-set(wip_tf_MAINTAINER "clm <clm@todo.todo>")
-set(wip_tf_DEPRECATED "")
-set(wip_tf_VERSION "0.0.0")
-set(wip_tf_BUILD_DEPENDS "roscpp" "rospy" "tf")
-set(wip_tf_RUN_DEPENDS "roscpp" "rospy" "tf")
-set(wip_tf_BUILDTOOL_DEPENDS "catkin")

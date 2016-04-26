@@ -1,7 +1,0 @@
-set(_CATKIN_CURRENT_PACKAGE "wip_gazebo")
-set(wip_gazebo_MAINTAINER "clm <clm@todo.todo>")
-set(wip_gazebo_DEPRECATED "")
-set(wip_gazebo_VERSION "0.0.0")
-set(wip_gazebo_BUILD_DEPENDS )
-set(wip_gazebo_RUN_DEPENDS )
-set(wip_gazebo_BUILDTOOL_DEPENDS "catkin")
