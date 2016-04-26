@@ -2,7 +2,7 @@
   <machine name="itx1" address="wip-itx1" env-loader="/opt/ros/indigo/env.sh" user="itx1"/>
 
   <node machine="itx1" pkg="web_video_server" type="web_video_server" name="web_video_server" respawn="true"/>
-  <node machine="itx1" pkg="kinect_aux" type="kinect_aux" name="kinect_aux" respawn="true"/>
+  <node machine="itx1" pkg="kinect_aux" type="kinect_aux_node" name="kinect_aux" respawn="true"/>
  
  <include file="$(find freenect_launch)/launch/freenect.launch" machine="itx1"/>
 
