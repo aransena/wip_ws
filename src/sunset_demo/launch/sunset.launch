@@ -1,0 +1,8 @@
+<launch>
+  <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch"/>
+  
+  <node pkg="websocket_server" type="ws_ros.py" name="ws_ros" respawn="true"/>
+  <node pkg="nri" type="websocket_ROS_interface.py" name="ws_ros_interface" respawn="true"/>
+  <node pkg="web_video_server" type="web_video_server" name="web_video_server" respawn="true"/>
+  
+</launch>

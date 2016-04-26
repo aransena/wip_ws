@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+
+import roslib
+import rospy
+import socket
+import sys
+
+if __name__=="__main__":
+	#rospy.loginfo("udp_listen.py: node started")
+	print "udp_listen.py: node started"
+	args = rospy.myargv(argv=sys.argv)
+	if (len(args) < 3 and len(args) > 1):
+		print "usage: my_node.py UDP_IP UDP_PORT"
+	elif len(args)==3:
+		UDP_IP = str(args[1])
+		UDP_PORT = int(args[2])
+	elif len(args)==1:
+		UDP_IP = "192.168.43.218"#"192.168.43.12" #"127.0.0.1" 
+		UDP_PORT = 21234	
+	else:
+		#rospy.logerr("failed to launch node - usage: `udp_listen.py UDP_IP UDP_PORT` OR `udp_listen.py`")
+		print "failed to launch node - usage: `udp_listen.py UDP_IP UDP_PORT` OR `udp_listen.py`"
+		sys.exit()
+
+	#rospy.loginfo("udp_listen.py: attempting connection to IP:%s Port:%d", UDP_IP, UDP_PORT)
+	print "udp_listen.py: attempting connection to IP:", UDP_IP, " Port:", UDP_PORT
+
+	try:
+		sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # Internet, UDP
+		sock.bind((UDP_IP, UDP_PORT))
+	except Exception,e: 
+		#rospy.logerr("udp_listen.py: FAILED connecting to IP:%s Port:%d \t error: %s", UDP_IP, UDP_PORT, e)
+		print "udp_listen.py: FAILED connecting to IP:",UDP_IP," Port:", UDP_PORT,"\nerror: ", e
+		sys.exit()
+
+	#rospy.loginfo("udp_listen.py: SUCCESS connecting to IP:%s Port:%d", UDP_IP, UDP_PORT)
+	print "udp_listen.py: SUCCESS connecting to IP:",UDP_IP, " Port:", UDP_PORT
+
+	while True:
+		  data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
+		  print "received message:", data
