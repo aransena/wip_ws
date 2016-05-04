@@ -1,5 +1,8 @@
 <launch>
-   <node name="arduino" pkg="ros_arduino_python" type="arduino_node.py" output="screen">
-      <rosparam file="$(find ros_arduino_python)/config/my_arduino_params.yaml" command="load" />
+   <machine name="itx1" address="wip-itx1" env-loader="/opt/ros/indigo/env.sh" user="itx1"/>
+   <machine name="itx2" address="wip-itx2" env-loader="/opt/ros/indigo/env.sh" user="itx2"/> 
+    <arg name="machine" />
+   <node name="wheels" pkg="low_level_wip" type="wheels.py" output="screen">
+      <rosparam file="$(find low_level_wip)/config/ll_wip.yaml" command="load" machine="$(arg machine)"/>
    </node>
 </launch>

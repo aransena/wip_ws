@@ -1,6 +1,9 @@
 <launch>
+   <machine name="itx1" address="wip-itx1" env-loader="/opt/ros/indigo/env.sh" user="itx1"/>
+   <machine name="itx2" address="wip-itx2" env-loader="/opt/ros/indigo/env_mod.sh" user="itx2"/> 
+
     <arg name="machine" />
-   <node name="wheels" pkg="low_level_wip" type="wheels.py" output="screen">
-      <rosparam file="$(find low_level_wip)/config/ll_wip.yaml" command="load" machine="$(arg machine)"/>
+   <node name="wheels" pkg="low_level_wip" type="wheels.py" output="screen" machine="$(arg machine)">
+      <rosparam file="$(find low_level_wip)/config/ll_wip.yaml" command="load"/>
    </node>
 </launch>
