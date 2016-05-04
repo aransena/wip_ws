@@ -138,7 +138,7 @@ def watch_interface(json_str, twist_mem):
     #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
 
     twist = Twist()
-    if data is None:
+    if data == "":
         twist = Twist()
     else:
         twist = get_twist_msg(data, twist_mem)
