@@ -1,5 +1,6 @@
 <launch>
+    <arg name="machine" />
    <node name="wheels" pkg="low_level_wip" type="wheels.py" output="screen">
-      <rosparam file="$(find low_level_wip)/config/ll_wip.yaml" command="load" />
+      <rosparam file="$(find low_level_wip)/config/ll_wip.yaml" command="load" machine="$(arg machine)"/>
    </node>
 </launch>
