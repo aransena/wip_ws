@@ -2,7 +2,7 @@
 
     <!-- Define Robot's Machines -->
     <machine name="itx1" address="wip-itx1" env-loader="/opt/ros/indigo/env.sh" user="itx1"/>
-    <machine name="itx2" address="wip-itx2" env-loader="/opt/ros/indigo/env.sh" user="itx2"/>
+    <machine name="itx2" address="wip-itx2" env-loader="/opt/ros/indigo/env_mod.sh" user="itx2"/>
 
     <!-- roslaunch nodes on itx1 -->
     <include machine="itx1"
