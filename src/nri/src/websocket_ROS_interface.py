@@ -24,6 +24,8 @@ def get_twist_msg(data, twist_mem):
     except:
         device = ""
         controlLevel = 0
+        vel = 0
+        heading = 0
         pass
 
     global heading
