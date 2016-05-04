@@ -18,8 +18,14 @@ class twistMessage:
 
 def get_twist_msg(data, twist_mem):
     print data
-    device= data['Device']
-    controlLevel= data['ControlLevel']
+    try:
+        device= data['Device']
+        controlLevel= data['ControlLevel']
+    except:
+        device = ""
+        controlLevel == 0
+        pass
+    
     global heading
     global angle
 
