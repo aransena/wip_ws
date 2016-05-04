@@ -17,7 +17,7 @@ class twistMessage:
 
 
 def get_twist_msg(data, twist_mem):
-    'rospy.loginfo(str(data))
+    rospy.loginfo(str(data))
     try:
         device= data['Device']
         controlLevel= data['ControlLevel']
@@ -32,6 +32,8 @@ def get_twist_msg(data, twist_mem):
     global angle
 
 
+    debug = rospy.Publisher('debug', ros_string)    
+    
 
     twist = Twist()
     if controlLevel == 1 or device == "SmartWatch":
@@ -41,7 +43,7 @@ def get_twist_msg(data, twist_mem):
             twist.linear.x = vel
             twist.angular.z = theta
 
-        elif device == "SmartWatch":
+        else:
             alpha = float(data['ALPHA'])
             beta = float(data['BETA'])
             bezelR = int(data['Clockwise'])
@@ -50,35 +52,34 @@ def get_twist_msg(data, twist_mem):
 
             if alpha < 5 and alpha > -5:
                 vel = float(beta)*-1
-                vel /= 10
                 if vel < 2 and vel > -2:
                     vel = 0
+                vel /= 10
 
+		if bezelR == 1:
+		    if vel != 0:
+		        if heading < 0:
+		            heading = 0
+		        else:
+		            if heading != -1:
+		                heading -= 0.1
+		            else:
+		                heading == -1
 
-                if bezelL == 1:
-                    if vel != 0:
-                        if heading > 0:
-                            heading = 0
-                        else:
-                            if heading != -1:
-                                heading -= 0.1
-                            else:
-                                heading == -1
+		    #twist_mem.angular_z += 0.2
+		    #else:
+		    #twist_mem.angular_z = 0.7
+		    #twist.angular.z = twist_mem.angular_z
 
-                    #twist_mem.angular_z += 0.2
-                    #else:
-                    #twist_mem.angular_z = 0.7
-                    #twist.angular.z = twist_mem.angular_z
-
-                elif bezelR == 1:
-                    if vel != 0:
-                        if heading < 0:
-                            heading = 0
-                        else:
-                            if heading != 1:
-                                heading += 0.1
-                            else:
-                                heading == 1
+		elif bezelL == 1:
+		    if vel != 0:
+		        if heading < 0:
+		            heading = 0
+		        else:
+		            if heading != 1:
+		                heading += 0.1
+		            else:
+		                heading == 1
             else:
                 vel = 0
                 heading = 0
@@ -129,13 +130,13 @@ def get_twist_msg(data, twist_mem):
 
 
 def watch_interface(json_str, twist_mem):
-    rospy.loginfo(json_str)
+
     try:
         data = json.loads(json_str.data)
     except:
         data = ""
         pass
-    #print "here"
+    
     pub = rospy.Publisher('cmd_vel', Twist)
 
     # pub = rospy.Publisher('robbie/cmd_vel', Twist)
@@ -145,9 +146,11 @@ def watch_interface(json_str, twist_mem):
 
     if data == "":
         twist = Twist()
+
     else:
         twist = get_twist_msg(data, twist_mem)
-        
+
+    
     if not rospy.is_shutdown():
         #print "sending ", twist
         pub.publish(twist)
