@@ -17,7 +17,7 @@ class twistMessage:
 
 
 def get_twist_msg(data, twist_mem):
-    print data
+    rospy.loginfo(str(data))
     try:
         device= data['Device']
         controlLevel= data['ControlLevel']
