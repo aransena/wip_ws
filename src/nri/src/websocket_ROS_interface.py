@@ -56,16 +56,16 @@ def get_twist_msg(data, twist_mem):
                 vel /= 10
             else:
                 vel = 0
-                
+
             if bezelR == 1:
-                if vel != 0:
-                    if heading < 0:
-                        heading = 0
+                #if vel != 0:
+                if heading < 0:
+                    heading = 0
+                else:
+                    if heading != -1:
+                        heading -= 0.1
                     else:
-                        if heading != -1:
-                            heading -= 0.1
-                        else:
-                            heading == -1
+                        heading == -1
 
                             # twist_mem.angular_z += 0.2
                             # else:
@@ -73,14 +73,14 @@ def get_twist_msg(data, twist_mem):
                             # twist.angular.z = twist_mem.angular_z
 
             elif bezelL == 1:
-                if vel != 0:
-                    if heading < 0:
-                        heading = 0
+#                if vel != 0:
+                if heading < 0:
+                    heading = 0
+                else:
+                    if heading != 1:
+                        heading += 0.1
                     else:
-                        if heading != 1:
-                            heading += 0.1
-                        else:
-                            heading == 1
+                        heading == 1
 
 
             twist.linear.x = vel  # twist_mem.linear_x

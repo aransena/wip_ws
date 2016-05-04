@@ -76,8 +76,8 @@
       <file leaf-file-name="websocket_ROS_interface.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2857143">
-              <caret line="58" column="16" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.85714287">
+              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -577,8 +577,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2857143">
-          <caret line="58" column="16" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.85714287">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
           <folding />
         </state>
       </provider>
