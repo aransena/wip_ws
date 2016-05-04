@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ee52eac-be2c-4077-82e8-9c49c3358bf5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch" afterPath="$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py" afterPath="$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py" />
     </list>
     <ignored path="wip_ws.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,11 +43,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="robot_configuration.launch" pinned="false" current-in-tab="true">
+      <file leaf-file-name="robot_configuration.launch" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.016129032">
+            <state vertical-scroll-proportion="-0.625">
               <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/nri/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="websocket_ROS_interface.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.1572327">
+              <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -76,6 +96,7 @@
         <option value="$PROJECT_DIR$/src/sunset_demo/launch/sunset.launch" />
         <option value="$PROJECT_DIR$/src/sunset_demo/launch/sunset_map.launch" />
         <option value="$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch" />
+        <option value="$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py" />
       </list>
     </option>
   </component>
@@ -180,6 +201,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="launch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wip_ws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wip_ws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nri" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wip_ws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wip_ws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nri" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -504,8 +565,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.016129032">
+        <state vertical-scroll-proportion="-0.625">
           <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nri/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1572327">
+          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
           <folding />
         </state>
       </provider>

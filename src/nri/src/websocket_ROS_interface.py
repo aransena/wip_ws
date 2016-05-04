@@ -24,7 +24,7 @@ def get_twist_msg(data, twist_mem):
 
 
     twist = Twist()
-    if control == 1:
+    if control == 1 or device == "SmartWatch":
         if device == "SmartPhone":
             vel = float(data['VEL'])
             theta = float(data['ANGLE'])
