@@ -17,7 +17,7 @@ class twistMessage:
 
 
 def get_twist_msg(data, twist_mem):
-    rospy.loginfo(str(data))
+    'rospy.loginfo(str(data))
     try:
         device= data['Device']
         controlLevel= data['ControlLevel']
@@ -129,6 +129,7 @@ def get_twist_msg(data, twist_mem):
 
 
 def watch_interface(json_str, twist_mem):
+    rospy.loginfo(json_str)
     try:
         data = json.loads(json_str.data)
     except:
@@ -141,11 +142,12 @@ def watch_interface(json_str, twist_mem):
     #pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
     #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
 
-    twist = Twist()
+
     if data == "":
         twist = Twist()
     else:
         twist = get_twist_msg(data, twist_mem)
+        
     if not rospy.is_shutdown():
         #print "sending ", twist
         pub.publish(twist)
