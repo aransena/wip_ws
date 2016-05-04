@@ -1,5 +1,15 @@
 <launch>
-	<include file="$(find openni2_launch)/launch/openni2.launch"/>
+	<include file="$(find freenect_launch)/launch/freenect.launch">
+        <param name="camera" value="kinect"/>
+        <param name="device_id" value="1"/>
+
+    </include>
+
+	<include file="$(find openni2_launch)/launch/openni2.launch">
+        <param name="camera" value="xtion"/>
+        <param name="device_id" value="2"/>
+    </include>
+
 	<include file="$(find hokuyo_node)/hokuyo_test.launch"/>
 	<include file="$(find tf_tree)/launch/tf_broadcaster.launch"/>
 </launch>
