@@ -79,6 +79,10 @@ def get_twist_msg(data, twist_mem):
                                 heading += 0.1
                             else:
                                 heading == 1
+            else:
+                vel = 0
+                heading = 0
+
 
             twist.linear.x = vel#twist_mem.linear_x
             twist.angular.z = heading
