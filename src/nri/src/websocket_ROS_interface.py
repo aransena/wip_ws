@@ -34,7 +34,7 @@ def get_twist_msg(data, twist_mem):
     global angle
 
     debug = rospy.Publisher('debug', ros_string)
-
+    debug.publish(str(controlLevel))
     twist = Twist()
     if controlLevel == 1 or device == "SmartWatch":
         if device == "SmartPhone":
