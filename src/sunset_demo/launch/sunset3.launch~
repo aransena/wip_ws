@@ -1,0 +1,4 @@
+<launch>
+   <node pkg="websocket_server" type="ws_ros.py" name="ws_ros" respawn="true"/>
+  
+</launch>
