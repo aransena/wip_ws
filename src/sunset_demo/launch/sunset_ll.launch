@@ -1,0 +1,13 @@
+<launch>
+
+<!-- Define Robot's Machines -->
+   <machine name="itx1" address="wip-itx1" env-loader="~/.bashrc" user="itx1"/>
+   <machine name="itx2" address="wip-itx2" env-loader="~/.bashrc" user="itx2"/> 
+
+<!-- itx2 startup (Low Level: Motor Control) -->
+<!-- rosrun nodes on itx2 -->
+
+<!-- roslaunch nodes on itx2 -->
+   <include machine="itx2" file="$(find low_level_wip)/launch/lowlevel.launch" />
+  
+</launch>
