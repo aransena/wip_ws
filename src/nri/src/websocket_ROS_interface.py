@@ -42,7 +42,7 @@ def get_twist_msg(data, twist_mem):
 
             if alpha < 5 and alpha > -5:
                 vel = float(beta)*-1
-                vel = vel/10
+                vel /= 10
                 if vel < 2 and vel > -2:
                     vel = 0
 
@@ -117,16 +117,23 @@ def get_twist_msg(data, twist_mem):
 
 
 def watch_interface(json_str, twist_mem):
-    data = json.loads(json_str.data)
+    try:
+        data = json.loads(json_str.data)
+    except:
+        data = ""
+        pass
     #print "here"
-    pub = rospy.Publisher('cmd_vel', Twist)
+        pub = rospy.Publisher('cmd_vel', Twist)
+
     # pub = rospy.Publisher('robbie/cmd_vel', Twist)
     #pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
     #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
 
     twist = Twist()
-
-    twist = get_twist_msg(data, twist_mem)
+    if data is None:
+        twist = Twist()
+    else:
+        twist = get_twist_msg(data, twist_mem)
     if not rospy.is_shutdown():
         #print "sending ", twist
         pub.publish(twist)
