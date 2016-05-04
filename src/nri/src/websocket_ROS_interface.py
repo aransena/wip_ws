@@ -123,7 +123,7 @@ def watch_interface(json_str, twist_mem):
         data = ""
         pass
     #print "here"
-        pub = rospy.Publisher('cmd_vel', Twist)
+    pub = rospy.Publisher('cmd_vel', Twist)
 
     # pub = rospy.Publisher('robbie/cmd_vel', Twist)
     #pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
