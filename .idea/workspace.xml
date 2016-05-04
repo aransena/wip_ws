@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ee52eac-be2c-4077-82e8-9c49c3358bf5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sunset_demo/launch/sunset_map.launch" afterPath="$PROJECT_DIR$/src/sunset_demo/launch/sunset_map.launch" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch" afterPath="$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch" />
     </list>
     <ignored path="wip_ws.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,20 +43,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="robot_configuration.launch" pinned="false" current-in-tab="false">
+      <file leaf-file-name="robot_configuration.launch" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.016129032">
+              <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sunset_map.launch" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sunset_map.launch" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sunset_demo/launch/sunset_map.launch">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.062893085">
+            <state vertical-scroll-proportion="0.0">
               <caret line="4" column="79" selection-start-line="4" selection-start-column="79" selection-end-line="4" selection-end-column="79" />
               <folding />
             </state>
@@ -75,8 +74,8 @@
         <option value="$PROJECT_DIR$/src/low_level_wip/scripts/wheels.py" />
         <option value="$PROJECT_DIR$/src/low_level_wip/launch/lowlevel.launch" />
         <option value="$PROJECT_DIR$/src/sunset_demo/launch/sunset.launch" />
-        <option value="$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch" />
         <option value="$PROJECT_DIR$/src/sunset_demo/launch/sunset_map.launch" />
+        <option value="$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch" />
       </list>
     </option>
   </component>
@@ -487,14 +486,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sunset_demo/launch/sunset.launch">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -505,8 +496,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sunset_demo/launch/sunset_map.launch">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.062893085">
+        <state vertical-scroll-proportion="0.0">
           <caret line="4" column="79" selection-start-line="4" selection-start-column="79" selection-end-line="4" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/robot_2dnav/launch/robot_configuration.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.016129032">
+          <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
           <folding />
         </state>
       </provider>
