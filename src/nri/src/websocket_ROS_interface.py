@@ -6,7 +6,8 @@ import json
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String as ros_string
 
-
+heading = 0
+angle = 0
 # from std_msgs.msg import Int8 as Int
 
 class twistMessage:
@@ -18,66 +19,82 @@ class twistMessage:
 def get_twist_msg(data, twist_mem):
     print data
     device= data['Device']
-    control= data['ControlLevel']
-
+    controlLevel= data['ControlLevel']
+    global heading
+    global angle
 
 
 
     twist = Twist()
-    if control == 1 or device == "SmartWatch":
+    if controlLevel == 1 or device == "SmartWatch":
         if device == "SmartPhone":
             vel = float(data['VEL'])
             theta = float(data['ANGLE'])
             twist.linear.x = vel
             twist.angular.z = theta
 
-        else:
-            vel = float(data['BETA'])*0.1
-            stop_cmd = data['ControlLevel']
+        elif device == "SmartWatch":
+            alpha = float(data['ALPHA'])
+            beta = float(data['BETA'])
             bezelR = int(data['Clockwise'])
             bezelL = int(data['CounterClockwise'])
-            swipeL = data['SwipeLeft']
-            swipeR = data['SwipeRight']
-            tap = data['Press']
-            longPress = data['LongHold']
-            mode = data['ControlLevel']
-            #if swipeR == 1:
 
-            #    twist_mem.linear_x += 0.1
-            twist.linear.x = vel*(-1)#twist_mem.linear_x
 
-            #elif swipeL == 1:
+            if alpha < 5 and alpha > -5:
+                vel = float(beta)*-1
+                if vel < 2 and vel > -2:
+                    vel = 0
 
-            #    twist_mem.linear_x -= 0.1
-            #    twist.linear.x = twist_mem.linear_x
-            #else:
-             #   twist.linear.x = twist_mem.linear_x
 
-    #        if stop_cmd == 0:
-     #           twist.angular.z = 0
-      #          twist_mem.angular_z = 0
+                if bezelL == 1:
+                    if vel != 0:
+                        if heading > 0:
+                            heading = 0
+                        else:
+                            if heading != -1:
+                                heading -= 0.1
+                            else:
+                                heading == -1
 
-            if bezelL == 1:
+                    #twist_mem.angular_z += 0.2
+                    #else:
+                    #twist_mem.angular_z = 0.7
+                    #twist.angular.z = twist_mem.angular_z
+
+                elif bezelR == 1:
+                    if vel != 0:
+                        if heading < 0:
+                            heading = 0
+                        else:
+                            if heading != 1:
+                                heading += 0.1
+                            else:
+                                heading == 1
+
+            twist.linear.x = vel#twist_mem.linear_x
+            twist.angular.z = heading
+
+#            if bezelL == 1:
                 #if mode == 1:
-                twist_mem.angular_z += 0.2
+#                twist_mem.angular_z += 0.2
                 #else:
                 #twist_mem.angular_z = 0.7
-                twist.angular.z = twist_mem.angular_z
+#                twist.angular.z = twist_mem.angular_z
 
-            elif bezelR == 1:
+#            elif bezelR == 1:
                 #if mode == 1:
-                twist_mem.angular_z -= 0.2
+#                twist_mem.angular_z -= 0.2
                 #else:
                 #twist_mem.angular_z = -0.7
-                twist.angular.z = twist_mem.angular_z
+#                twist.angular.z = twist_mem.angular_z
 
     #        elif tap == 1:
     #            twist_mem.angular_z = 0
     #            twist.angular.z = twist_mem.angular_z
 
-            else:
+ #           else:
                 #if mode == 1:
-                twist.angular.z = twist_mem.angular_z
+ #               twist.angular.z = twist_mem.angular_z
                 #elif mode == 2:
                 #    twist.angular.z = 0
                 #else:
