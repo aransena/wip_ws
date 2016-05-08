@@ -35,7 +35,9 @@ def get_twist_msg(data, twist_mem):
 
     debug = rospy.Publisher('debug', ros_string)
     debug.publish(str(controlLevel))
+
     twist = Twist()
+
     if controlLevel == 1 or device == "SmartWatch":
         if device == "SmartPhone":
             vel = float(data['VEL'])
@@ -56,62 +58,29 @@ def get_twist_msg(data, twist_mem):
                 vel /= 10
 
                 if bezelR == 1:
-                    #if vel != 0:
                     if heading > 0:
                         heading = 0
                     else:
                         if heading != -1:
                             heading -= 0.1
                         else:
-                            heading == -1
+                            heading = -1
 
-                                # twist_mem.angular_z += 0.2
-                                # else:
-                                # twist_mem.angular_z = 0.7
-                                # twist.angular.z = twist_mem.angular_z
 
                 elif bezelL == 1:
-    #                if vel != 0:
                     if heading < 0:
                         heading = 0
                     else:
                         if heading != 1:
                             heading += 0.1
                         else:
-                            heading == 1
+                            heading = 1
             else:
                 vel = 0
                 heading = 0
 
-
             twist.linear.x = vel  # twist_mem.linear_x
             twist.angular.z = heading
-
-            #            if bezelL == 1:
-            # if mode == 1:
-            #                twist_mem.angular_z += 0.2
-            # else:
-            # twist_mem.angular_z = 0.7
-            #                twist.angular.z = twist_mem.angular_z
-
-            #            elif bezelR == 1:
-            # if mode == 1:
-            #                twist_mem.angular_z -= 0.2
-            # else:
-            # twist_mem.angular_z = -0.7
-            #                twist.angular.z = twist_mem.angular_z
-
-            #        elif tap == 1:
-            #            twist_mem.angular_z = 0
-            #            twist.angular.z = twist_mem.angular_z
-
-            #           else:
-            # if mode == 1:
-            #               twist.angular.z = twist_mem.angular_z
-            # elif mode == 2:
-            #    twist.angular.z = 0
-            # else:
-            # twist.angular.z = 0
 
             twist.linear.y = 0
             twist.linear.z = 0
