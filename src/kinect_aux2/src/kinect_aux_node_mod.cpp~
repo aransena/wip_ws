@@ -13,8 +13,8 @@
 #define FREENECT_COUNTS_PER_G 819.
 // The kinect can tilt from +31 to -31 degrees in what looks like 1 degree increments
 // The control input looks like 2*desired_degrees
-#define MAX_TILT_ANGLE -15.//31.
-#define MIN_TILT_ANGLE (-60.)//(-31.)
+#define MAX_TILT_ANGLE 0.//31.
+#define MIN_TILT_ANGLE (-85.)//(-31.)
 
 ros::Publisher pub_imu;
 ros::Publisher pub_tilt_angle;
