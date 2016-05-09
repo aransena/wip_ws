@@ -5,11 +5,13 @@
 
 
 	<!-- Run the map server -->
-	<node name="map_server" pkg="map_server" type="map_server" args="$(find robot_2dnav)/maps/temp_map.yaml"/>
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find robot_2dnav)/maps/map.yaml"/>
+	<!--<node name="map_server" pkg="map_server" type="map_server" args="/map.yaml"/>-->
 
 
 	<!-- Run AMCL -->
-	<include file="$(find amcl)/examples/amcl_diff.launch" />
+	<!--<include file="$(find amcl)/examples/amcl_diff.launch" />-->
+	<node name="amcl" pkg="amcl" type="amcl"/>
 
 
 	<!-- Load Parameters -->

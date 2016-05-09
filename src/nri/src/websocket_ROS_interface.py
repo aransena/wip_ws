@@ -53,7 +53,9 @@ def get_twist_msg(data, twist_mem):
                 vel = float(beta) * -1
                 if vel < 2 and vel > -2:
                     vel = 0
-                vel /= 10
+
+		max_speed = 0.8
+                vel = (vel/10) * max_speed
 
                 if bezelR == 1:
                     #if vel != 0:
