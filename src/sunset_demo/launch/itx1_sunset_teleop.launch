@@ -22,14 +22,4 @@
           respawn="false"/> <!-- server for streaming video to HRI devices -->
 
 
-    <!-- itx2 startup (Low Level: Motor Control) -->
-    <!-- rosrun nodes on itx2 -->
-
-    <!-- roslaunch nodes on itx2 -->
-
-    <include file="$(find low_level_wip)/launch/lowlevel.launch">
-        <arg name="machine" value="itx2"/>
-	<arg name="cmd_topic" value="smooth_cmd_vel"/>
-    </include>
-
 </launch>
