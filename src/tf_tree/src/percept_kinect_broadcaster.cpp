@@ -20,7 +20,7 @@ int main(int argc, char** argv){
 			tf::StampedTransform(
 				tf::Transform(tf::Quaternion(0,0,0,1),  		//transform does not need to rotate the sensor
 					tf::Vector3(0.23,0.0,0.96)),					//trasform DOES need to translate the sensor (x,y,z)
-				ros::Time::now(),"hip_link", "percept_kinect_link"));
+				ros::Time::now(),"hip_link", "kinect_link"));
 				//printf("okay\n");
 		r.sleep();
 	}

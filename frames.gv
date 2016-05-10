@@ -1,0 +1,23 @@
+digraph G {
+"base_link" -> "hip_link"[label="Broadcaster: /hip_publisher_tf\nAverage rate: 10.204 Hz\nMost recent transform: 1462380137.262 ( 0.083 sec old)\nBuffer length: 4.900 sec\n"];
+"odom" -> "base_link"[label="Broadcaster: /wheels\nAverage rate: 200.217 Hz\nMost recent transform: 1462380133.914 ( 3.432 sec old)\nBuffer length: 4.975 sec\n"];
+"map" -> "odom"[label="Broadcaster: /gmapping\nAverage rate: 20.202 Hz\nMost recent transform: 1462380137.395 ( -0.049 sec old)\nBuffer length: 4.950 sec\n"];
+"shoulder_link" -> "wrist_link"[label="Broadcaster: /wrist_publisher_tf\nAverage rate: 10.204 Hz\nMost recent transform: 1462380137.270 ( 0.076 sec old)\nBuffer length: 4.900 sec\n"];
+"hip_link" -> "shoulder_link"[label="Broadcaster: /shoulder_publisher_tf\nAverage rate: 10.204 Hz\nMost recent transform: 1462380137.272 ( 0.074 sec old)\nBuffer length: 4.900 sec\n"];
+"kinect_rgb_frame" -> "kinect_rgb_optical_frame"[label="Broadcaster: /kinect_base_link3\nAverage rate: 10.195 Hz\nMost recent transform: 1462380137.380 ( -0.034 sec old)\nBuffer length: 4.904 sec\n"];
+"kinect_link" -> "kinect_rgb_frame"[label="Broadcaster: /kinect_base_link1\nAverage rate: 10.195 Hz\nMost recent transform: 1462380137.380 ( -0.034 sec old)\nBuffer length: 4.904 sec\n"];
+"hip_link" -> "kinect_link"[label="Broadcaster: /percept_kinect_publisher_tf\nAverage rate: 10.204 Hz\nMost recent transform: 1462380137.301 ( 0.044 sec old)\nBuffer length: 4.900 sec\n"];
+"base_link" -> "xtion_link"[label="Broadcaster: /nav_xtion_publisher_tf\nAverage rate: 50.202 Hz\nMost recent transform: 1462380137.338 ( 0.008 sec old)\nBuffer length: 4.960 sec\n"];
+"wrist_link" -> "hand_link"[label="Broadcaster: /hand_publisher_tf\nAverage rate: 10.204 Hz\nMost recent transform: 1462380137.283 ( 0.063 sec old)\nBuffer length: 4.900 sec\n"];
+"kinect_depth_frame" -> "kinect_depth_optical_frame"[label="Broadcaster: /kinect_base_link2\nAverage rate: 10.194 Hz\nMost recent transform: 1462380137.391 ( -0.045 sec old)\nBuffer length: 4.905 sec\n"];
+"kinect_link" -> "kinect_depth_frame"[label="Broadcaster: /kinect_base_link\nAverage rate: 10.195 Hz\nMost recent transform: 1462380137.432 ( -0.086 sec old)\nBuffer length: 4.904 sec\n"];
+"shoulder_link" -> "laser"[label="Broadcaster: /laser_publisher_tf\nAverage rate: 10.204 Hz\nMost recent transform: 1462380137.306 ( 0.040 sec old)\nBuffer length: 4.900 sec\n"];
+"xtion_link" -> "xtion_depth_frame"[label="Broadcaster: /xtion_base_link\nAverage rate: 10.194 Hz\nMost recent transform: 1462380137.414 ( -0.069 sec old)\nBuffer length: 4.905 sec\n"];
+"xtion_depth_frame" -> "xtion_depth_optical_frame"[label="Broadcaster: /xtion_base_link2\nAverage rate: 10.195 Hz\nMost recent transform: 1462380137.423 ( -0.078 sec old)\nBuffer length: 4.904 sec\n"];
+"xtion_rgb_frame" -> "xtion_rgb_optical_frame"[label="Broadcaster: /xtion_base_link3\nAverage rate: 10.195 Hz\nMost recent transform: 1462380137.432 ( -0.086 sec old)\nBuffer length: 4.904 sec\n"];
+"xtion_link" -> "xtion_rgb_frame"[label="Broadcaster: /xtion_base_link1\nAverage rate: 10.199 Hz\nMost recent transform: 1462380137.352 ( -0.006 sec old)\nBuffer length: 4.805 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1462380137.346"[ shape=plaintext ] ;
+ }->"map";
+}

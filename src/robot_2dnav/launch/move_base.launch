@@ -3,17 +3,20 @@
 	<!-- Start ros master if required -->
 	<master auto="start"/>
 
+	<arg name="machine" default="itx1"/>
 
 	<!-- Run the map server -->
-	<node name="map_server" pkg="map_server" type="map_server" args="$(find robot_2dnav)/maps/temp_map.yaml"/>
+	<node machine="$(arg machine)" name="map_server" pkg="map_server" type="map_server" args="/home/$(arg machine)/wip_ws/src/robot_2dnav/maps/map.yaml"/>
+	<!--<node name="map_server" pkg="map_server" type="map_server" args="/map.yaml"/>-->
 
 
 	<!-- Run AMCL -->
-	<include file="$(find amcl)/examples/amcl_diff.launch" />
+	<!--<include file="$(find amcl)/examples/amcl_diff.launch" />-->
+	<node machine="$(arg machine)" name="amcl" pkg="amcl" type="amcl"/>
 
 
 	<!-- Load Parameters -->
-	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+	<node machine="$(arg machine)" pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 		<rosparam file="$(find robot_2dnav)/params/costmap_common_params.yaml" command="load" ns="global_costmap" />
 		<rosparam file="$(find robot_2dnav)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
 		<rosparam file="$(find robot_2dnav)/params/local_costmap_params.yaml" command="load"/>

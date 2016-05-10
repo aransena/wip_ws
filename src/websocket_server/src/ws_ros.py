@@ -24,8 +24,12 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         print message
         if len(message) > 10:
-            msg = json.loads(message)
-            json.dump(msg, outfile)
+            try:
+                msg = json.loads(message)
+                json.dump(msg, outfile)
+            except:
+                message = ""
+                pass
         #print 'received message: %s\n' % json.loads(message)
         pub.publish(str(message))
         if message == "USER":

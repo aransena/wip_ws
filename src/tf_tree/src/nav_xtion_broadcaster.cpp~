@@ -16,10 +16,10 @@ int main(int argc, char** argv){
 	//	float z = rand()%100; 									// variable z axis for platform - replace with subscription to a topic?
 		broadcaster.sendTransform(
 			tf::StampedTransform(
-				tf::Transform(tf::Quaternion(0,1,0,0),  		//transform does not need to rotate the sensor
-					tf::Vector3(0.385,0.00,0.047)),					//trasform DOES need to translate the sensor (x,y,z)
+				tf::Transform(tf::Quaternion(0.1,0,0,0),  		//transform does not need to rotate the sensor
+					tf::Vector3(3.14,0.00,0.0)),	//tf::Vector3(0.385,0.00,0.047)),					//trasform DOES need to translate the sensor (x,y,z)
 
-				ros::Time::now(),"base_link", "camera_link"));
+				ros::Time::now(),"base_link", "xtion_link"));
 				//printf("okay\n");
 		r.sleep();
 	}

@@ -6,6 +6,9 @@ import json
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String as ros_string
 
+heading = 0
+angle = 0
+
 
 # from std_msgs.msg import Int8 as Int
 
@@ -16,15 +19,26 @@ class twistMessage:
 
 
 def get_twist_msg(data, twist_mem):
-    print data
-    device= data['Device']
-    control= data['ControlLevel']
+    rospy.loginfo(str(data))
+    try:
+        device = data['Device']
+        controlLevel = data['ControlLevel']
+    except:
+        device = ""
+        controlLevel = 0
+        vel = 0
+        heading = 0
+        pass
 
+    global heading
+    global angle
 
-
+    debug = rospy.Publisher('debug', ros_string)
+    debug.publish(str(controlLevel))
 
     twist = Twist()
-    if control == 1:
+
+    if controlLevel == 1 or device == "SmartWatch":
         if device == "SmartPhone":
             vel = float(data['VEL'])
             theta = float(data['ANGLE'])
@@ -32,56 +46,43 @@ def get_twist_msg(data, twist_mem):
             twist.angular.z = theta
 
         else:
-            vel = float(data['BETA'])*0.1
-            stop_cmd = data['ControlLevel']
+            alpha = float(data['ALPHA'])
+            beta = float(data['BETA'])
             bezelR = int(data['Clockwise'])
             bezelL = int(data['CounterClockwise'])
-            swipeL = data['SwipeLeft']
-            swipeR = data['SwipeRight']
-            tap = data['Press']
-            longPress = data['LongHold']
-            mode = data['ControlLevel']
-            #if swipeR == 1:
 
-            #    twist_mem.linear_x += 0.1
-            twist.linear.x = vel*(-1)#twist_mem.linear_x
+            if alpha < 5 and alpha > -5:
+                vel = float(beta) * -1
+                if vel < 2 and vel > -2:
+                    vel = 0
 
-            #elif swipeL == 1:
+		max_speed = 0.8
+                vel = (vel/10) * max_speed
 
-            #    twist_mem.linear_x -= 0.1
-            #    twist.linear.x = twist_mem.linear_x
-            #else:
-             #   twist.linear.x = twist_mem.linear_x
+                if bezelR == 1:
+                    if heading > 0:
+                        heading = 0
+                    else:
+                        if heading != -1:
+                            heading -= 0.1
+                        else:
+                            heading = -1
 
-    #        if stop_cmd == 0:
-     #           twist.angular.z = 0
-      #          twist_mem.angular_z = 0
 
-            if bezelL == 1:
-                #if mode == 1:
-                twist_mem.angular_z += 0.2
-                #else:
-                #twist_mem.angular_z = 0.7
-                twist.angular.z = twist_mem.angular_z
-
-            elif bezelR == 1:
-                #if mode == 1:
-                twist_mem.angular_z -= 0.2
-                #else:
-                #twist_mem.angular_z = -0.7
-                twist.angular.z = twist_mem.angular_z
-
-    #        elif tap == 1:
-    #            twist_mem.angular_z = 0
-    #            twist.angular.z = twist_mem.angular_z
-
+                elif bezelL == 1:
+                    if heading < 0:
+                        heading = 0
+                    else:
+                        if heading != 1:
+                            heading += 0.1
+                        else:
+                            heading = 1
             else:
-                #if mode == 1:
-                twist.angular.z = twist_mem.angular_z
-                #elif mode == 2:
-                #    twist.angular.z = 0
-                #else:
-                #twist.angular.z = 0
+                vel = 0
+                heading = 0
+
+            twist.linear.x = vel  # twist_mem.linear_x
+            twist.angular.z = heading
 
             twist.linear.y = 0
             twist.linear.z = 0
@@ -94,23 +95,32 @@ def get_twist_msg(data, twist_mem):
         twist.angular.z = 0
         twist_mem.angular_z = 0
 
-    #print twist
+    # print twist
     return twist
 
 
 def watch_interface(json_str, twist_mem):
-    data = json.loads(json_str.data)
-    #print "here"
-    # pub = rospy.Publisher('cmd_vel', Twist)
+    try:
+        data = json.loads(json_str.data)
+    except:
+        data = ""
+        pass
+
+    pub = rospy.Publisher('cmd_vel', Twist)
+
     # pub = rospy.Publisher('robbie/cmd_vel', Twist)
-    #pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
-    pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
+    # pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
+    # pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
 
-    twist = Twist()
 
-    twist = get_twist_msg(data, twist_mem)
+    if data == "":
+        twist = Twist()
+
+    else:
+        twist = get_twist_msg(data, twist_mem)
+
     if not rospy.is_shutdown():
-        #print "sending ", twist
+        # print "sending ", twist
         pub.publish(twist)
 
 
