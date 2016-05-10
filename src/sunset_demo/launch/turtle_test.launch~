@@ -1,6 +1,0 @@
-<launch>
-  <machine name=
-
-  <node pkg="turtlesim" type="turtlesim_node" name="turtle" respawn="true"/>
-  
-</launch>
