@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6ee52eac-be2c-4077-82e8-9c49c3358bf5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py" afterPath="$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/websocket_server/src/ws_ros.py" afterPath="$PROJECT_DIR$/src/websocket_server/src/ws_ros.py" />
-    </list>
+    <list default="true" id="6ee52eac-be2c-4077-82e8-9c49c3358bf5" name="Default" comment="" />
     <ignored path="wip_ws.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
