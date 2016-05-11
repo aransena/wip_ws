@@ -79,13 +79,15 @@ def twist_listener(cmd_msg):
 
 def tilt_angle_listener(angle):
     global tilt
-    tilt = angle.data
+    if angle.data != 64:
+        tilt = angle.data
     print tilt
 
 
 if __name__ == "__main__":
     try:
         global heading
+
         heading = 0
 
         pub = rospy.Publisher('websocket_server_msgs', ros_string)
