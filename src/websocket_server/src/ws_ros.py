@@ -43,7 +43,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         if message == "USER":
             print "Responding..."
             self.write_message(message)  # + ' OK')
-            
+
         elif message == "TILT_UP":
             kinect_pub.publish(tilt + 10)
         elif message == "TILT_DOWN":
@@ -58,8 +58,10 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                         heading_msg = {u"heading": heading}
                     except Exception, e:
                         print e
+                        pass
                     self.write_message(json.dumps(heading_msg))
-            except:
+            except Exception, e:
+                print e
                 pass
 
 

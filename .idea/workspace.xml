@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6ee52eac-be2c-4077-82e8-9c49c3358bf5" name="Default" comment="" />
+    <list default="true" id="6ee52eac-be2c-4077-82e8-9c49c3358bf5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/websocket_server/src/ws_ros.py" afterPath="$PROJECT_DIR$/src/websocket_server/src/ws_ros.py" />
+    </list>
     <ignored path="wip_ws.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +25,8 @@
             <file leaf-file-name="websocket_ROS_interface.py" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.8120301">
-                    <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
+                  <state vertical-scroll-proportion="0.4924812">
+                    <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
                     <folding>
                       <element signature="e#23#35#0" expanded="true" />
                     </folding>
@@ -46,8 +48,8 @@
       <file leaf-file-name="ws_ros.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/websocket_server/src/ws_ros.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3710692">
-              <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.7012579">
+              <caret line="60" column="28" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
               <folding>
                 <element signature="e#107#119#0" expanded="true" />
               </folding>
@@ -78,7 +80,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-3295" />
+    <option name="x" value="65" />
     <option name="y" value="-4" />
     <option name="width" value="1855" />
     <option name="height" value="1084" />
@@ -400,7 +402,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3295" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -691,8 +693,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8120301">
-          <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.4924812">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="e#23#35#0" expanded="true" />
           </folding>
@@ -701,8 +703,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/websocket_server/src/ws_ros.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3710692">
-          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.7012579">
+          <caret line="60" column="28" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
           <folding>
             <element signature="e#107#119#0" expanded="true" />
           </folding>
