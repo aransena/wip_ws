@@ -10,8 +10,8 @@
 
 
 	<!-- Run AMCL -->
-	<!--<include file="$(find amcl)/examples/amcl_diff.launch" />-->
-	<node name="amcl" pkg="amcl" type="amcl"/>
+	<include file="$(find amcl)/examples/amcl_diff.launch" />
+	<!--<node name="amcl" pkg="amcl" type="amcl"/>-->
 
 
 	<!-- Load Parameters -->
