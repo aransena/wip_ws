@@ -45,6 +45,7 @@ def get_twist_msg(data, twist_mem):
             twist.linear.x = vel
             twist.angular.z = theta
 
+
         else:
             alpha = float(data['ALPHA'])
             beta = float(data['BETA'])
@@ -106,11 +107,11 @@ def watch_interface(json_str, twist_mem):
         data = ""
         pass
 
-    #pub = rospy.Publisher('cmd_vel', Twist)
+    pub = rospy.Publisher('cmd_vel', Twist)
 
     # pub = rospy.Publisher('robbie/cmd_vel', Twist)
     # pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
-    pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
+    #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
 
 
     if data == "":
