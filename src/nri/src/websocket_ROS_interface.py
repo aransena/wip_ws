@@ -45,6 +45,7 @@ def get_twist_msg(data, twist_mem):
             twist.linear.x = vel
             twist.angular.z = theta
 
+
         else:
             alpha = float(data['ALPHA'])
             beta = float(data['BETA'])
