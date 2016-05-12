@@ -4,11 +4,8 @@
 
     <!-- itx1 startup (High Level: Navigation, HRI) -->
     <!-- roslaunch nodes on itx1 -->
-    <include file="$(find robot_2dnav)/launch/robot_configuration_mod.launch"/> <!-- start navigation --> -->
+    <include file="$(find robot_2dnav)/launch/itx1_robot_configuration.launch"/> <!-- start navigation --> -->
    
-    <include file="$(find yocs_velocity_smoother)/launch/standalone.launch">
-	<arg name="raw_cmd_vel_topic" value="cmd_vel"/>
-    </include>
     <!-- rosrun nodes on itx1 -->
     <node pkg="websocket_server" type="ws_ros.py" name="ws_ros"
           respawn="false"/> <!-- server for HRI device comms -->
@@ -18,7 +15,6 @@
           respawn="true"/> <!-- server for streaming video to HRI devices -->
     <node pkg="kinect_aux2" type="kinect_aux_node_mod" name="kinect_aux"
           respawn="false"/> <!-- server for streaming video to HRI devices -->
-    <node pkg="gmapping" type="slam_gmapping" name="gmapping" respawn="false"/>
 
 
 </launch>

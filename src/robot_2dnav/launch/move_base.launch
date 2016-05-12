@@ -11,7 +11,6 @@
 
 
 	<!-- Run AMCL -->
-	<!-- <include file="$(find amcl)/examples/amcl_diff.launch" /> -->
     <node machine="$(arg machine)" name="amcl" pkg="amcl" type="amcl" respawn="true">
       <param name="odom_model_type" value="diff"/>
       <param name="odom_alpha5" value="0.1"/>
