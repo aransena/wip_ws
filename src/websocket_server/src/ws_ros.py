@@ -44,9 +44,18 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             print "Responding..."
             self.write_message(message)  # + ' OK')
         elif message=="TILT_UP":
-            kinect_pub.publish(tilt+10)
+            if tilt+10 > -15:
+                send_tilt= -15            
+            else:
+                send_tilt=tilt+10
+            kinect_pub.publish(send_tilt)
         elif message=="TILT_DOWN":
-            kinect_pub.publish(tilt-10)
+            if tilt-10 < -60:
+                send_tilt= -60
+            else:
+                send_tilt=tilt-10
+
+            kinect_pub.publish(send_tilt)
         else:
             global heading
             heading_msg={u"heading":heading}
@@ -64,14 +73,14 @@ def twist_listener(cmd_msg):
 
 def tilt_angle_listener(angle):
     global tilt
-    tilt = angle.data
-    print tilt
+    if angle.data != 64:
+        tilt = angle.data
 
 if __name__ == "__main__":
     try:
         pub = rospy.Publisher('websocket_server_msgs', ros_string)
         kinect_pub = rospy.Publisher('tilt_angle', ros_float)
-        rospy.Subscriber("/cmd_vel_mux/input/teleop", Twist, twist_listener) ### CHANGE TO SMOOTH_CMD_VEL
+        rospy.Subscriber("/smooth_cmd_vel", Twist, twist_listener) ### CHANGE TO SMOOTH_CMD_VEL
         rospy.Subscriber("/cur_tilt_angle", ros_float, tilt_angle_listener) ### CHANGE TO SMOOTH_CMD_VEL
         rospy.init_node('websocket_server', anonymous=True)
         rospy.loginfo("websocket_server started")

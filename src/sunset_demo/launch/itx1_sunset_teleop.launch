@@ -6,10 +6,10 @@
 
     <!-- itx1 startup (High Level: Navigation, HRI) -->
     <!-- roslaunch nodes on itx1 -->
-    <include file="$(find robot_2dnav)/launch/robot_configuration_mod.launch"/> <!-- start navigation --> -->
-    <include file="$(find yocs_velocity_smoother)/launch/standalone.launch">
+    <include file="$(find robot_2dnav)/launch/itx1_robot_configuration.launch"/> <!-- start navigation --> -->
+    <!-- <include file="$(find yocs_velocity_smoother)/launch/standalone.launch">
         <arg name="raw_cmd_vel_topic" value="cmd_vel"/>
-    </include>
+    </include> -->
 
     <!-- rosrun nodes on itx1 -->
     <node machine="itx1" pkg="websocket_server" type="ws_ros.py" name="ws_ros"
