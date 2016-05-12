@@ -10,9 +10,18 @@
 
     <!-- roslaunch nodes on itx2 -->
 
+    <include file="$(find robot_2dnav)/launch/robot_configuration_mod.launch"/>
+
     <include file="$(find low_level_wip)/launch/lowlevel.launch">
         <arg name="machine" value="itx2"/>
 	<arg name="cmd_topic" value="smooth_cmd_vel"/>
     </include>
+
+<include file="$(find yocs_velocity_smoother)/launch/standalone.launch">
+        <arg name="raw_cmd_vel_topic" value="cmd_vel"/>
+    </include>
+
+    
+
 
 </launch>

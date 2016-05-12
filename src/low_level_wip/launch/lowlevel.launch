@@ -1,7 +1,7 @@
 <launch>
     <arg name="machine" default="itx2"/>
    <arg name="cmd_topic" default="cmd_vel"/>
-   <node name="wheels" pkg="low_level_wip" type="wheels.py" output="screen">
+   <node name="wheels" pkg="low_level_wip" type="wheels.py" output="screen" respawn="false">
 	<remap from="cmd_vel" to="$(arg cmd_topic)" />
       <rosparam file="$(find low_level_wip)/config/ll_wip.yaml" command="load"/>
    </node>

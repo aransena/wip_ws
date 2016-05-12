@@ -53,7 +53,7 @@
 		<rosparam file="$(find robot_2dnav)/params/local_costmap_params.yaml" command="load"/>
 		<rosparam file="$(find robot_2dnav)/params/global_costmap_params.yaml" command="load"/>
 		<rosparam file="$(find robot_2dnav)/params/base_local_planner_params.yaml" command="load"/>
-		<param name="controller_frequency" value="20" type="double"/>
+		<param name="controller_frequency" value="60" type="double"/>
 		<param name="oscillation_reset_dist" value="0.01" type="double"/>
 	</node>
 
