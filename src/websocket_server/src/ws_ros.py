@@ -43,35 +43,36 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         if message == "USER":
             print "Responding..."
             self.write_message(message)  # + ' OK')
-<<<<<<< HEAD
-        elif message=="TILT_UP":
-            if tilt+10 > -15:
-                send_tilt= -15            
-            else:
-                send_tilt=tilt+10
-            kinect_pub.publish(send_tilt)
-        elif message=="TILT_DOWN":
-            if tilt-10 < -60:
-                send_tilt= -60
-            else:
-                send_tilt=tilt-10
 
-            kinect_pub.publish(send_tilt)
+<< << << < HEAD
+elif message == "TILT_UP":
+if tilt + 10 > -15:
+    send_tilt = -15
+else:
+    send_tilt = tilt + 10
+kinect_pub.publish(send_tilt)
+elif message == "TILT_DOWN":
+if tilt - 10 < -60:
+    send_tilt = -60
+else:
+    send_tilt = tilt - 10
 
-        else:
-            try:
-                device = msg['Device']
-                if device == "SmartWatch":
-                    global heading
-                    try:
-                        heading_msg = {u"heading": heading}
-                    except Exception, e:
-                        print e
-                        pass
-                    self.write_message(json.dumps(heading_msg))
-            except Exception, e:
-                print e
-                pass
+kinect_pub.publish(send_tilt)
+
+else:
+try:
+    device = msg['Device']
+    if device == "SmartWatch":
+        global heading
+        try:
+            heading_msg = {u"heading": heading}
+        except Exception, e:
+            print e
+            pass
+        self.write_message(json.dumps(heading_msg))
+except Exception, e:
+    print e
+    pass
 
 
 def on_close(self):
