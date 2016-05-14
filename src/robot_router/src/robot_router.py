@@ -34,7 +34,7 @@ def run_FB2():
                                transitions={'new_goal': 'S3_NAVIGATE', 'error': 'ERR'},
                                remapping={'read_request_goal': 'sm_request_goal', 'send_nav_goal': 'sm_nav_goal'})
         smach.StateMachine.add('S3_NAVIGATE', states.navigate(),
-                               transitions={'goal_reached': 'S2_SET_GOAL', 'error': 'ERR', 'timeout': 'S1_READ'},
+                               transitions={'goal_reached': 'S1_READ', 'error': 'ERR', 'timeout': 'S1_READ', 'new_goal':'S2_SET_GOAL'},
                                remapping={'read_nav_goal': 'sm_nav_goal', 'send_request_goal': 'sm_request_goal',
                                           'send_current_goal': 'sm_current_goal'})
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import time
 import random
+import math
 
 import rospy
 import smach
@@ -9,13 +10,18 @@ import smach_ros
 import actionlib
 import subprocess
 
+import tf
+
 from move_base_msgs.msg import MoveBaseGoal
 from move_base_msgs.msg import MoveBaseAction
+from move_base_msgs.msg import MoveBaseActionFeedback
 
 from smach_ros import SimpleActionState
 from smach_ros import ServiceState
 from std_msgs.msg import String
 from geometry_msgs.msg import Pose2D
+from geometry_msgs.msg import PoseStamped
+from geometry_msgs.msg import PoseWithCovarianceStamped
 
 responses = ['PENDING', 'ACTIVE', 'REJECTED', 'SUCCEEDED', 'ABORTED', 'PREEMPTING', 'PREEMPTED', 'RECALLING',
              'RECALLED', 'LOST']
@@ -52,10 +58,17 @@ def callback_goal(data):
     goal.target_pose.header.stamp = rospy.Time.now()
 
     goal.target_pose.pose.position.x = data.x
-    goal.target_pose.pose.position.x = data.y
-    goal.target_pose.pose.orientation.w = data.theta
-    print goal
-    #goal = data
+    goal.target_pose.pose.position.y = data.y
+
+    radians = math.radians(data.theta)
+    quaternion = tf.transformations.quaternion_from_euler(0, 0, radians) # roll, pitch, yaw
+
+    goal.target_pose.pose.orientation.x = quaternion[0]
+    goal.target_pose.pose.orientation.y = quaternion[1]
+    goal.target_pose.pose.orientation.z = quaternion[2]
+    goal.target_pose.pose.orientation.w = quaternion[3]
+    print goal  # goal = data
+
 
 
 def callback_timeoutCheck(data):
@@ -66,6 +79,20 @@ def callback_timeoutCheck(data):
 def callback_benchmark_state(data):
     global benchmark_state
     benchmark_state = data
+
+def callback_curr_pos(data):
+    #print data
+
+    #pose = PoseWithCovarianceStamped()
+    #pose = data
+
+    #quaternion = (data.pose.pose.orientation.x,data.pose.pose.orientation.y,data.pose.pose.orientation.z,data.pose.pose.orientation.w)
+    orientation = data.feedback.base_position.pose.orientation
+    quaternion = (orientation.x,orientation.y,orientation.z,orientation.w)
+
+    euler = tf.transformations.euler_from_quaternion(quaternion)
+    #print math.degrees(euler[2])
+
 
 
 # ----------- STATES---------#
@@ -97,7 +124,7 @@ class wait_for_point(smach.State):
 
         try:
             rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
-            rospy.wait_for_message("/nav_goal", Pose2D,10)
+            rospy.wait_for_message("/nav_goal", Pose2D)
             return 'proceed'
         except Exception as e:
             print e
@@ -124,29 +151,36 @@ class set_goal(smach.State):
 
 class navigate(smach.State):
     def __init__(self):
-        smach.State.__init__(self, outcomes=['goal_reached', 'error', 'timeout'],
+        smach.State.__init__(self, outcomes=['goal_reached', 'error', 'timeout', 'new_goal'],
                              input_keys=['read_nav_goal'],
                              output_keys=['send_request_goal', 'send_current_goal'])
 
         self.client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
 
     def execute(self, userdata):
+        global goal
         rospy.loginfo('Executing state S3_NAVIGATE')
         # time.sleep(1)
 
         self.client.wait_for_server()
-        # pub = rospy.Publisher('tcd_curr_goal', geometry_msgs / Pose2D, latch=True, queue_size=10)
+
+        #rospy.Subscriber("/amcl_pose", PoseWithCovarianceStamped, callback_curr_pos)
+        rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
+
         # pub.publish(userdata.read_nav_goal)
-        self.client.send_goal(userdata.read_nav_goal)
+        curr_nav_goal = userdata.read_nav_goal
+        self.client.send_goal(curr_nav_goal)
 
         while (self.client.wait_for_result(rospy.Duration(1.0)) != True):
             print responses[self.client.get_state()]
-        # rospy.Subscriber("roah_rsbb/benchmarkstate", String, callback_timeoutCheck)
-        #    if timeout == BenchmarkState.PREPARE:
-        #        self.client.cancel_goal()
-        #        return 'timeout'
+            if curr_nav_goal != goal:
+                print "NEW GOAL"
+                self.client.cancel_all_goals()
+                return 'new_goal'
+
 
         result = self.client.get_state()
+
         if result == 3:  ## success
             at_waypoint()
             return 'goal_reached'
