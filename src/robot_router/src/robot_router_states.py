@@ -9,17 +9,18 @@ import smach_ros
 import actionlib
 import subprocess
 
-import move_base_msgs.msg as MB
+from move_base_msgs.msg import MoveBaseGoal
+from move_base_msgs.msg import MoveBaseAction
 
 from smach_ros import SimpleActionState
 from smach_ros import ServiceState
 from std_msgs.msg import String
-from geometry_msgs.msg import Pose2D as ros_pose
+from geometry_msgs.msg import Pose2D
 
 responses = ['PENDING', 'ACTIVE', 'REJECTED', 'SUCCEEDED', 'ABORTED', 'PREEMPTING', 'PREEMPTED', 'RECALLING',
              'RECALLED', 'LOST']
 
-goal = MB.MoveBaseAction
+global goal
 stop = bool
 benchmark_state = 0
 
@@ -29,7 +30,7 @@ benchmark_state = 0
 def at_waypoint():
     print "..."
     # logcommand = "rosbag record -l 1 /chatter"
-    # stopcommand = "rostopic pub /cmd_vel geometry_msgs/Twist '[0.0,0.0,0.0]' '[0.0,0.0,0.0]'"
+    #stopcommand = "rostopic pub /cmd_vel geometry_msgs/Twist '[0.0,0.0,0.0]' '[0.0,0.0,0.0]'"
     # subprocess.call([logcommand],shell=True)
     # subprocess.call([stopcommand],shell=True)
     # rospy.wait_for_service('roah_rsbb/end_execute')
@@ -42,8 +43,19 @@ def at_waypoint():
 
 
 def callback_goal(data):
+    #print data
     global goal
-    goal = data
+    goal = MoveBaseGoal()
+    goal.target_pose.header.frame_id = 'map'
+
+    #goal.target_pose = data
+    goal.target_pose.header.stamp = rospy.Time.now()
+
+    goal.target_pose.pose.position.x = data.x
+    goal.target_pose.pose.position.x = data.y
+    goal.target_pose.pose.orientation.w = data.theta
+    print goal
+    #goal = data
 
 
 def callback_timeoutCheck(data):
@@ -84,8 +96,8 @@ class wait_for_point(smach.State):
         rospy.loginfo('Executing S1_READ')
 
         try:
-            rospy.Subscriber("/nav_goal", ros_pose, callback_goal)
-            rospy.wait_for_message("/nav_goal", ros_pose,100)
+            rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
+            rospy.wait_for_message("/nav_goal", Pose2D,10)
             return 'proceed'
         except Exception as e:
             print e
@@ -101,7 +113,7 @@ class set_goal(smach.State):
 
     def execute(self, userdata):
         try:
-            print str(goal.x), str(goal.y), str(goal.theta)
+            #print str(goal.x), str(goal.y), str(goal.theta)
             rospy.loginfo('Executing state S2_SET_GOAL')
             userdata.send_nav_goal = goal
             return 'new_goal'
@@ -116,7 +128,7 @@ class navigate(smach.State):
                              input_keys=['read_nav_goal'],
                              output_keys=['send_request_goal', 'send_current_goal'])
 
-        self.client = actionlib.SimpleActionClient('move_base', MB.MoveBaseAction)
+        self.client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
 
     def execute(self, userdata):
         rospy.loginfo('Executing state S3_NAVIGATE')
