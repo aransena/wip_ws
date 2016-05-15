@@ -34,6 +34,7 @@ stop = bool
 benchmark_state = 0
 
 
+
 # ----------- HELPER FUNCTIONS ---------#
 
 def at_waypoint():
@@ -70,7 +71,7 @@ def callback_goal(data):
     goal.target_pose.pose.orientation.y = quaternion[1]
     goal.target_pose.pose.orientation.z = quaternion[2]
     goal.target_pose.pose.orientation.w = quaternion[3]
-    print goal  # goal = data
+    print "RECEIVED GOAL" #goal  # goal = data
 
 
 def callback_location(data):
@@ -105,7 +106,7 @@ def callback_location(data):
         goal.target_pose.pose.orientation.y = quaternion[1]
         goal.target_pose.pose.orientation.z = quaternion[2]
         goal.target_pose.pose.orientation.w = quaternion[3]
-        print goal  # goal = data
+        print "LOCATION UPDATED"#goal  # goal = data
 
     else:
         goal = None
@@ -156,7 +157,17 @@ def callback_curr_goal(goal_data): # GOAL FROM RVIZ POINT UPDATE
 
     #quaternion = (data.pose.pose.orientation.x,data.pose.pose.orientation.y,data.pose.pose.orientation.z,data.pose.pose.orientation.w)
 
-    print curr_goal
+    print "CURR GOAL UPDATED"#curr_goal
+
+
+
+rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
+rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
+rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
+rospy.Subscriber("/location_goal", String, callback_location)
+rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
+rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
+
 
 # ----------- STATES---------#
 
@@ -186,7 +197,7 @@ class wait_for_point(smach.State):
         rospy.loginfo('Executing S1_READ')
 
         try:
-            rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
+            #rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
             rospy.wait_for_message("/nav_goal", Pose2D)
             return 'proceed'
         except Exception as e:
@@ -202,7 +213,7 @@ class wait_for_location(smach.State):
         rospy.loginfo('Executing S1_READ')
 
         try:
-            rospy.Subscriber("/location_goal", String, callback_location)
+            #rospy.Subscriber("/location_goal", String, callback_location)
             rospy.wait_for_message("/location_goal", String)
             if goal is None:
                 return 'error' # change to loop back on waiting
@@ -245,8 +256,8 @@ class navigate(smach.State):
         # time.sleep(1)
 
         self.client.wait_for_server()
-        rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
-        rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
+        #rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
+        #rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
         curr_nav_goal = userdata.read_nav_goal
         self.client.send_goal(curr_nav_goal)
 
@@ -287,23 +298,22 @@ class monitor(smach.State):
 
         rospy.loginfo('Executing state S3B_MONITOR')
         # time.sleep(1)
+        #self.client.wait_for_server()
+
         self.client.wait_for_server()
+        #rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
+        #rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
+        #curr_nav_goal = userdata.read_nav_goal
+        self.client.send_goal(curr_goal)
 
-        #rospy.Subscriber("/amcl_pose", PoseWithCovarianceStamped, callback_curr_pos)
-        rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
-
-        print curr_goal
-        # pub.publish(userdata.read_nav_goal)
-        curr_nav_goal = curr_goal
-        self.client.send_goal(curr_nav_goal)
+        goal = curr_goal
 
         while (self.client.wait_for_result(rospy.Duration(1.0)) != True):
             print responses[self.client.get_state()]
-            if curr_nav_goal != goal:
+            if curr_goal != goal:
+                curr_goal = goal
                 print "NEW GOAL"
                 self.client.cancel_all_goals()
-                break
-
                 #return 'new_goal'
 
 

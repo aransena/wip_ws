@@ -137,6 +137,8 @@ def convert_pose_to_goal(data): # X Y THETA TO GOAL
     converted_goal.target_pose.pose.orientation.w = quaternion[3]
     return converted_goal
 
+rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
+rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
 
 # ----------- STATES---------#
 
@@ -218,11 +220,11 @@ class navigate(smach.State):
         self.client.wait_for_server()
 
         #rospy.Subscriber("/amcl_pose", PoseWithCovarianceStamped, callback_curr_pos)
-        rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
-        rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
+        #rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
+        #rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
 
         # pub.publish(userdata.read_nav_goal)
-        curr_nav_goal = userdata.read_nav_goal
+        #curr_nav_goal = userdata.read_nav_goal
         self.client.send_goal(curr_nav_goal)
 
         while (self.client.wait_for_result(rospy.Duration(1.0)) != True):

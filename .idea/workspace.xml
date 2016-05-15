@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ee52eac-be2c-4077-82e8-9c49c3358bf5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/locations/locations.json" afterPath="$PROJECT_DIR$/src/robot_router/src/locations/locations.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py" afterPath="$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/robot_router.py" afterPath="$PROJECT_DIR$/src/robot_router/src/robot_router.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/robot_router_states.py" afterPath="$PROJECT_DIR$/src/robot_router/src/robot_router_states.py" />
     </list>
     <ignored path="wip_ws.iws" />
@@ -38,8 +37,8 @@
             <file leaf-file-name="robot_circuit_states.py" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.58270675">
-                    <caret line="280" column="0" selection-start-line="280" selection-start-column="0" selection-end-line="280" selection-end-column="0" />
+                  <state vertical-scroll-proportion="-1.6115289">
+                    <caret line="139" column="14" selection-start-line="139" selection-start-column="14" selection-end-line="139" selection-end-column="14" />
                     <folding />
                   </state>
                 </provider>
@@ -81,8 +80,8 @@
       <file leaf-file-name="robot_router_states.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router_states.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.418239">
-              <caret line="304" column="21" selection-start-line="304" selection-start-column="21" selection-end-line="304" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.7704403">
+              <caret line="308" column="24" selection-start-line="308" selection-start-column="24" selection-end-line="308" selection-end-column="24" />
               <folding>
                 <element signature="e#22#33#0" expanded="true" />
               </folding>
@@ -131,8 +130,8 @@
         <option value="$PROJECT_DIR$/src/nri/src/move_base_parameters_client.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/robot_circuit.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/locations/locations.json" />
-        <option value="$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/robot_router.py" />
+        <option value="$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/robot_router_states.py" />
       </list>
     </option>
@@ -1012,16 +1011,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58270675">
-          <caret line="280" column="0" selection-start-line="280" selection-start-column="0" selection-end-line="280" selection-end-column="0" />
+        <state vertical-scroll-proportion="-1.6115289">
+          <caret line="139" column="14" selection-start-line="139" selection-start-column="14" selection-end-line="139" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router_states.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.418239">
-          <caret line="304" column="21" selection-start-line="304" selection-start-column="21" selection-end-line="304" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.7704403">
+          <caret line="308" column="24" selection-start-line="308" selection-start-column="24" selection-end-line="308" selection-end-column="24" />
           <folding>
             <element signature="e#22#33#0" expanded="true" />
           </folding>
