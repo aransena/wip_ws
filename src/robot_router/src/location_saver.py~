@@ -17,8 +17,8 @@ global location
 
 def callback_curr_pos(data):
     global location
-    location = Pose2D()
-    #location = PoseWithCovarianceStamped()
+    #location = Pose2D()
+    location = PoseWithCovarianceStamped()
     #position = data.feedback.base_position.pose.position
     position = data.pose.pose.position
     location.x = position.x
