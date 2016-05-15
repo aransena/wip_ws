@@ -26,8 +26,10 @@ from geometry_msgs.msg import PoseWithCovarianceStamped
 responses = ['PENDING', 'ACTIVE', 'REJECTED', 'SUCCEEDED', 'ABORTED', 'PREEMPTING', 'PREEMPTED', 'RECALLING',
              'RECALLED', 'LOST']
 
+MB_REJECTED = 2
 MB_SUCCESS = 3
 MB_ABORTED = 4
+
 
 global goal
 global curr_goal
@@ -166,7 +168,6 @@ class get_goal(smach.State):
         global goal
         rospy.loginfo('Executing S1_GET_GOAL')
 
-        print "INTERVENTION: ", userdata.intervention
         goals = (convert_pose_to_goal([0,0,0]),convert_pose_to_goal([1,0,0]),convert_pose_to_goal([1,1,0]))
         try:
             if userdata.intervention==False:
@@ -287,7 +288,7 @@ class monitor(smach.State):
             return 'goal_reached'
         elif result == MB_ABORTED:
             return 'new_goal'
-        elif result == 2:
+        elif result == MB_REJECTED:
             userdata.intervention=True
             print userdata.intervention
             return 'intervention'

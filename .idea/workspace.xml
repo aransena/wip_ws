@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ee52eac-be2c-4077-82e8-9c49c3358bf5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/nri/src/move_base_parameters_client.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/nri/src/watch_interface.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/nri/src/watch_interface_flipback.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/nri/src/watch_interface_multi_mode.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py" afterPath="$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/robot_circuit.py" afterPath="$PROJECT_DIR$/src/robot_router/src/robot_circuit.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/locations/locations.json" afterPath="$PROJECT_DIR$/src/robot_router/src/locations/locations.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py" afterPath="$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/robot_router.py" afterPath="$PROJECT_DIR$/src/robot_router/src/robot_router.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/robot_router_states.py" afterPath="$PROJECT_DIR$/src/robot_router/src/robot_router_states.py" />
     </list>
     <ignored path="wip_ws.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,18 +21,26 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="DockManager">
-    <window id="1">
+    <window id="2">
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="location_saver.py" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/robot_router/src/location_saver.py">
+            <file leaf-file-name="robot_circuit.py" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.88721806">
-                    <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-                    <folding>
-                      <element signature="e#23#35#0" expanded="true" />
-                    </folding>
+                  <state vertical-scroll-proportion="0.0">
+                    <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="44" selection-end-column="82" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="robot_circuit_states.py" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="0.58270675">
+                    <caret line="280" column="0" selection-start-line="280" selection-start-column="0" selection-end-line="280" selection-end-column="0" />
+                    <folding />
                   </state>
                 </provider>
               </entry>
@@ -52,31 +56,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="robot_circuit.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3616352">
-              <caret line="33" column="75" selection-start-line="33" selection-start-column="75" selection-end-line="33" selection-end-column="75" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="robot_circuit_states.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="161" column="134" selection-start-line="161" selection-start-column="134" selection-end-line="161" selection-end-column="134" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ws_ros.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/websocket_server/src/ws_ros.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+              <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
               <folding>
                 <element signature="e#107#119#0" expanded="true" />
               </folding>
@@ -84,23 +68,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="move_base_parameters_client.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/nri/src/move_base_parameters_client.py">
+      <file leaf-file-name="robot_router.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
+              <caret line="44" column="112" selection-start-line="44" selection-start-column="112" selection-end-line="44" selection-end-column="112" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="robot_router_states.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router_states.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.418239">
+              <caret line="304" column="21" selection-start-line="304" selection-start-column="21" selection-end-line="304" selection-end-column="21" />
               <folding>
-                <element signature="e#23#35#0" expanded="true" />
+                <element signature="e#22#33#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="websocket_ROS_interface.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py">
+      <file leaf-file-name="locations.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/robot_router/src/locations/locations.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="29" />
+            <state vertical-scroll-proportion="-13.75">
+              <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -130,21 +124,22 @@
         <option value="$PROJECT_DIR$/src/robot_2dnav/launch/move_base.launch" />
         <option value="$PROJECT_DIR$/src/robot_2dnav/launch/move_base_mod.launch" />
         <option value="$PROJECT_DIR$/src/sunset_demo/launch/sunset_reconf.launch" />
-        <option value="$PROJECT_DIR$/src/robot_router/src/robot_router_states.py" />
-        <option value="$PROJECT_DIR$/src/robot_router/src/robot_router.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/location_saver.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/location_deleter.py" />
         <option value="$PROJECT_DIR$/src/websocket_server/src/ws_ros.py" />
         <option value="$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py" />
         <option value="$PROJECT_DIR$/src/nri/src/move_base_parameters_client.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/robot_circuit.py" />
+        <option value="$PROJECT_DIR$/src/robot_router/src/locations/locations.json" />
         <option value="$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py" />
+        <option value="$PROJECT_DIR$/src/robot_router/src/robot_router.py" />
+        <option value="$PROJECT_DIR$/src/robot_router/src/robot_router_states.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-1056" />
+    <option name="y" value="24" />
     <option name="width" value="1855" />
     <option name="height" value="1056" />
   </component>
@@ -222,6 +217,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="websocket_server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wip_ws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wip_ws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="websocket_server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -320,6 +337,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wip_ws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wip_ws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="robot_router" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="locations" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -541,7 +584,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-1056" width="1855" height="1056" extended-state="6" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -587,13 +630,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router_states.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/websocket_server/src/ws_ros.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -622,6 +658,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -629,6 +666,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#22#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -902,20 +942,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64285713">
-          <caret line="36" column="64" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router_states.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2631579">
-          <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/robot_router/src/location_deleter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4548872">
@@ -924,19 +950,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/websocket_server/src/ws_ros.py">
+    <entry file="file://$PROJECT_DIR$/src/nri/src/move_base_parameters_client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.28301886">
+          <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
           <folding>
-            <element signature="e#107#119#0" expanded="true" />
+            <element signature="e#23#35#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nri/src/websocket_ROS_interface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.11006289">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="29" />
           <folding />
         </state>
@@ -944,37 +970,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/robot_router/src/location_saver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.88721806">
-          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/websocket_server/src/ws_ros.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
           <folding>
-            <element signature="e#23#35#0" expanded="true" />
+            <element signature="e#107#119#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/nri/src/move_base_parameters_client.py">
+    <entry file="file://$PROJECT_DIR$/src/robot_router/src/locations/locations.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
-          <folding>
-            <element signature="e#23#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="161" column="134" selection-start-line="161" selection-start-column="134" selection-end-line="161" selection-end-column="134" />
+        <state vertical-scroll-proportion="-13.75">
+          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3616352">
-          <caret line="33" column="75" selection-start-line="33" selection-start-column="75" selection-end-line="33" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="44" selection-end-column="82" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="112" selection-start-line="44" selection-start-column="112" selection-end-line="44" selection-end-column="112" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.58270675">
+          <caret line="280" column="0" selection-start-line="280" selection-start-column="0" selection-end-line="280" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router_states.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.418239">
+          <caret line="304" column="21" selection-start-line="304" selection-start-column="21" selection-end-line="304" selection-end-column="21" />
+          <folding>
+            <element signature="e#22#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
