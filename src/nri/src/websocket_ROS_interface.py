@@ -5,7 +5,7 @@ import json
 
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String as ros_string
-
+from std_msgs.msg import Int8
 heading = 0
 angle = 0
 
@@ -33,8 +33,8 @@ def get_twist_msg(data, twist_mem):
     global heading
     global angle
 
-    debug = rospy.Publisher('debug', ros_string)
-    debug.publish(str(controlLevel))
+    control_pub= rospy.Publisher('control_level', Int8)
+    control_pub.publish(controlLevel)
 
     twist = Twist()
 

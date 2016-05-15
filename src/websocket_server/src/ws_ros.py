@@ -43,7 +43,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         if message == "USER":
             print "Responding..."
             self.write_message(message)  # + ' OK')
-<<<<<<< HEAD
+
         elif message=="TILT_UP":
             if tilt+10 > -15:
                 send_tilt= -15            
