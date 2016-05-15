@@ -33,11 +33,11 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         print message
 	if "LOCATION" in message:
             loc = message.split(",")[1]
-            print loc
+            print "GOTO: ",loc
             loc_pub.publish(loc)
 	elif "UPDATE" in message:
             loc = message.split(",")[1]
-            print loc
+            print "UPDATE: ",loc
             loc_update_pub.publish(loc)
         elif len(message) > 10:
             try:
@@ -67,14 +67,15 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             else:
                 send_tilt = tilt - 10
 
+
             kinect_pub.publish(send_tilt)
 
         else:
             try:
-		device = msg['Device']
+                device = msg['Device']
                 if device == "SmartWatch":
                     global heading
-                    try:
+                    try:W
                         heading_msg = {u"heading": heading}
                     except Exception, e:
                         print e

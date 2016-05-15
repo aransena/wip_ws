@@ -67,11 +67,12 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             else:
                 send_tilt = tilt - 10
 
+
             kinect_pub.publish(send_tilt)
 
         else:
             try:
-		device = msg['Device']
+                device = msg['Device']
                 if device == "SmartWatch":
                     global heading
                     try:
