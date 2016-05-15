@@ -6,9 +6,10 @@ import json
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String as ros_string
 from std_msgs.msg import Int8
+
 heading = 0
 angle = 0
-
+controlLevel = 0
 
 # from std_msgs.msg import Int8 as Int
 
@@ -18,8 +19,9 @@ class twistMessage:
         self.angular_z = 0
 
 
-def get_twist_msg(data, twist_mem):
-    rospy.loginfo(str(data))
+def get_twist_msg(data):
+    global controlLevel
+    #rospy.loginfo(str(data))
     try:
         device = data['Device']
         controlLevel = data['ControlLevel']
@@ -33,18 +35,18 @@ def get_twist_msg(data, twist_mem):
     global heading
     global angle
 
-    control_pub= rospy.Publisher('control_level', Int8)
-    control_pub.publish(controlLevel)
+
 
     twist = Twist()
 
-    if controlLevel == 1 or device == "SmartWatch":
+    if controlLevel == 1:
         if device == "SmartPhone":
             vel = float(data['VEL'])
-            theta = float(data['ANGLE'])
-            twist.linear.x = vel
-            twist.angular.z = theta
-
+            heading = float(data['ANGLE'])
+            #theta = float(data['ANGLE'])
+            #twist.linear.x = vel
+            #twist.angular.z = theta
+            #controlLevel = controlLevel-1
 
         else:
             alpha = float(data['ALPHA'])
@@ -57,8 +59,8 @@ def get_twist_msg(data, twist_mem):
                 if vel < 3 and vel > -4:
                     vel = 0
 
-		max_speed = 0.8
-                vel = (vel/10) * max_speed
+                max_speed = 0.8
+                vel = (vel / 10) * max_speed
 
                 if bezelR == 1:
                     if heading > 0:
@@ -81,54 +83,57 @@ def get_twist_msg(data, twist_mem):
             else:
                 vel = 0
                 heading = 0
+                controlLevel=0
+        #print vel, heading
+        twist.linear.x = vel  # twist_mem.linear_x
+        twist.angular.z = heading
 
-            twist.linear.x = vel  # twist_mem.linear_x
-            twist.angular.z = heading
-
-            twist.linear.y = 0
-            twist.linear.z = 0
-            twist.angular.x = 0
-            twist.angular.y = 0
+        twist.linear.y = 0
+        twist.linear.z = 0
+        twist.angular.x = 0
+        twist.angular.y = 0
 
     else:
         twist.linear.x = 0
-        twist_mem.linear_x = 0
         twist.angular.z = 0
-        twist_mem.angular_z = 0
+        #if device=="SmartPhone" and controlLevel!=0:
+        #    controlLevel=controlLevel-1
 
-    # print twist
+    print controlLevel
+    control_pub.publish(controlLevel)
     return twist
 
 
-def watch_interface(json_str, twist_mem):
+def device_interface(json_str):
+    global controlLevel
     try:
         data = json.loads(json_str.data)
     except:
         data = ""
         pass
 
-    pub = rospy.Publisher('cmd_vel', Twist)
-
-    # pub = rospy.Publisher('robbie/cmd_vel', Twist)
-    # pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
-    #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
-
-
     if data == "":
         twist = Twist()
 
     else:
-        twist = get_twist_msg(data, twist_mem)
+        twist = get_twist_msg(data)
+    print controlLevel
 
-    if not rospy.is_shutdown():
+
+    if not rospy.is_shutdown() and controlLevel==1:
+        print twist
+
         # print "sending ", twist
+        #print twist
         pub.publish(twist)
 
 
+
+
+
+
 def listener():
-    rospy.init_node('watch_interface', anonymous=True)
-    tm = twistMessage()
-    rospy.Subscriber("websocket_server_msgs", ros_string, watch_interface, tm)
+    rospy.Subscriber("websocket_server_msgs", ros_string, device_interface)
 
     rospy.spin()
 
@@ -136,6 +141,15 @@ def listener():
 if __name__ == "__main__":
 
     try:
+        rospy.init_node('websocket_ROS_interface', anonymous=True)
+        #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
+        #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
+        pub = rospy.Publisher('cmd_vel', Twist)
+        control_pub = rospy.Publisher('control_level', Int8,latch=True)
+        # pub = rospy.Publisher('robbie/cmd_vel', Twist)
+        # pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
+
+
         listener()
 
     except rospy.ROSInterruptException:

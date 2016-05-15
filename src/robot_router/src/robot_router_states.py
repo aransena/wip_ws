@@ -241,7 +241,7 @@ class wait_for_control(smach.State):
         try:
             #rospy.Subscriber("/location_goal", String, callback_location)
             rospy.wait_for_message("/control_level", Int8)
-            if control_level < 1:
+            if control_level <= 1:
                 return 'wait' # change to loop back on waiting
             else:
                 if goal is None:
@@ -295,7 +295,7 @@ class navigate(smach.State):
 
         while (self.client.wait_for_result(rospy.Duration(1.0)) != True):
             print responses[self.client.get_state()]
-            if control_level < 1:
+            if control_level <= 1:
                 self.client.cancel_all_goals()
                 return 'goal_reached'
 
@@ -348,7 +348,7 @@ class monitor(smach.State):
 
         while (self.client.wait_for_result(rospy.Duration(1.0)) != True):
             print responses[self.client.get_state()]
-            if control_level < 1:
+            if control_level <= 1:
                 self.client.cancel_all_goals()
                 return 'goal_reached'
             elif curr_goal != goal:

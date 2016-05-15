@@ -1,21 +1,19 @@
 <launch>
 
     <!-- Define Robot's Machines -->
-    <machine name="itx1" address="wip-itx1" env-loader="/opt/ros/indigo/env.sh" user="itx1"/>
-    <machine name="itx2" address="wip-itx2" env-loader="/opt/ros/indigo/env_mod.sh" user="itx2"/>
 
     <!-- itx1 startup (High Level: Navigation, HRI) -->
     <!-- roslaunch nodes on itx1 -->
     <include file="$(find robot_2dnav)/launch/itx1_robot_configuration.launch"/> <!-- start navigation --> -->
-
+   
     <!-- rosrun nodes on itx1 -->
-    <node machine="itx1" pkg="websocket_server" type="ws_ros.py" name="ws_ros"
+    <node pkg="websocket_server" type="ws_ros.py" name="ws_ros"
           respawn="false"/> <!-- server for HRI device comms -->
-    <node machine="itx1" pkg="nri" type="websocket_ROS_interface.py" name="ws_ros_interface"
+    <node pkg="nri" type="websocket_ROS_interface.py" name="ws_ros_interface"
           respawn="true"/> <!-- converts JSON to ROS messages -->
-    <node machine="itx1" pkg="web_video_server" type="web_video_server" name="web_video_server"
+    <node pkg="web_video_server" type="web_video_server" name="web_video_server"
           respawn="true"/> <!-- server for streaming video to HRI devices -->
-    <node machine="itx1" pkg="kinect_aux2" type="kinect_aux_node_mod" name="kinect_aux"
+    <node pkg="kinect_aux2" type="kinect_aux_node_mod" name="kinect_aux"
           respawn="false"/> <!-- server for streaming video to HRI devices -->
 
 
