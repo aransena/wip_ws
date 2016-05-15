@@ -159,17 +159,22 @@ class initialise(smach.State):
 
 class get_goal(smach.State):
     def __init__(self):
-        smach.State.__init__(self, outcomes=['proceed', 'error', 'finished'])
+        smach.State.__init__(self, outcomes=['proceed', 'error', 'finished'], input_keys=['intervention'], output_keys=['intervention'])
         self.index = 0
 
     def execute(self, userdata):
         global goal
         rospy.loginfo('Executing S1_GET_GOAL')
+
+        print "INTERVENTION: ", userdata.intervention
         goals = (convert_pose_to_goal([0,0,0]),convert_pose_to_goal([1,0,0]),convert_pose_to_goal([1,1,0]))
         try:
-            self.index = self.index+1
-            if self.index>=len(goals):
-                self.index=0
+            if userdata.intervention==False:
+                self.index = self.index+1
+
+                if self.index>=len(goals):
+                    self.index=0
+            userdata.intervention=False
 
             goal = goals[self.index]
             return 'proceed'
@@ -200,9 +205,10 @@ class navigate(smach.State):
     def __init__(self):
         smach.State.__init__(self, outcomes=['goal_reached', 'error', 'timeout', 'new_goal','intervention'],
                              input_keys=['read_nav_goal'],
-                             output_keys=['send_request_goal', 'send_current_goal'])
+                             output_keys=['send_request_goal', 'send_current_goal','intervention'])
 
         self.client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+
 
     def execute(self, userdata):
         global goal
@@ -236,7 +242,7 @@ class navigate(smach.State):
         elif result == MB_ABORTED:
             return 'new_goal'
         elif result == 2:
-            intervention=False
+            userdata.intervention=True
             return 'intervention'
         else:
             return 'error'
@@ -282,6 +288,8 @@ class monitor(smach.State):
         elif result == MB_ABORTED:
             return 'new_goal'
         elif result == 2:
+            userdata.intervention=True
+            print userdata.intervention
             return 'intervention'
         else:
             return 'error'

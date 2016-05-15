@@ -23,20 +23,22 @@ def run_FB2():
     sm.userdata.sm_current_goal = MB.MoveBaseGoal()
     sm.userdata.sm_nav_goal = MB.MoveBaseGoal()
     sm.userdata.sm_request_goal = True
+    sm.userdata.sm_intervention = False
 
     # open container
     with sm:
         smach.StateMachine.add('S0_INITALISE', states.initialise(),
                                transitions={'proceed': 'S1_GET_GOAL', 'wait': 'S0_INITALISE', 'error': 'ERR'})
         smach.StateMachine.add('S1_GET_GOAL', states.get_goal(),
-                               transitions={'proceed': 'S2_SET_GOAL', 'error': 'ERR', 'finished': 'S5_CLEANUP'})
+                               transitions={'proceed': 'S2_SET_GOAL', 'error': 'ERR', 'finished': 'S5_CLEANUP'},
+                               remapping={'intervention':'sm_intervention'})
         smach.StateMachine.add('S2_SET_GOAL', states.set_goal(),
                                transitions={'new_goal': 'S3_NAVIGATE', 'error': 'ERR'},
                                remapping={'read_request_goal': 'sm_request_goal', 'send_nav_goal': 'sm_nav_goal'})
         smach.StateMachine.add('S3_NAVIGATE', states.navigate(),
                                transitions={'goal_reached': 'S1_GET_GOAL', 'error': 'ERR', 'timeout': 'S1_GET_GOAL', 'new_goal':'S1_GET_GOAL','intervention':'S3B_MONITOR'},
                                remapping={'read_nav_goal': 'sm_nav_goal', 'send_request_goal': 'sm_request_goal',
-                                          'send_current_goal': 'sm_current_goal'})
+                                          'send_current_goal': 'sm_current_goal','intervention':'sm_intervention'})
         smach.StateMachine.add('S3B_MONITOR', states.monitor(),
                                transitions={'goal_reached': 'S1_GET_GOAL', 'error': 'ERR', 'timeout': 'S1_GET_GOAL', 'new_goal':'S1_GET_GOAL','intervention':'S3B_MONITOR'},
                                remapping={'read_nav_goal': 'sm_nav_goal', 'send_request_goal': 'sm_request_goal',
