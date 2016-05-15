@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ee52eac-be2c-4077-82e8-9c49c3358bf5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py" afterPath="$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/robot_router.py" afterPath="$PROJECT_DIR$/src/robot_router/src/robot_router.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/robot_router/src/robot_router_states.py" afterPath="$PROJECT_DIR$/src/robot_router/src/robot_router_states.py" />
     </list>
     <ignored path="wip_ws.iws" />
@@ -20,26 +19,18 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="DockManager">
-    <window id="2">
+    <window id="3">
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="robot_circuit.py" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit.py">
+            <file leaf-file-name="robot_router_states.py" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router_states.py">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.0">
-                    <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="44" selection-end-column="82" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="robot_circuit_states.py" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="-1.6115289">
-                    <caret line="139" column="14" selection-start-line="139" selection-start-column="14" selection-end-line="139" selection-end-column="14" />
-                    <folding />
+                  <state vertical-scroll-proportion="0.43609023">
+                    <caret line="299" column="36" selection-start-line="299" selection-start-column="36" selection-end-line="299" selection-end-column="36" />
+                    <folding>
+                      <element signature="e#22#33#0" expanded="true" />
+                    </folding>
                   </state>
                 </provider>
               </entry>
@@ -67,24 +58,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="robot_router.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="robot_router.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="44" column="112" selection-start-line="44" selection-start-column="112" selection-end-line="44" selection-end-column="112" />
+            <state vertical-scroll-proportion="0.34591195">
+              <caret line="32" column="126" selection-start-line="32" selection-start-column="126" selection-end-line="32" selection-end-column="126" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="robot_router_states.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router_states.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7704403">
-              <caret line="308" column="24" selection-start-line="308" selection-start-column="24" selection-end-line="308" selection-end-column="24" />
-              <folding>
-                <element signature="e#22#33#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -130,15 +109,15 @@
         <option value="$PROJECT_DIR$/src/nri/src/move_base_parameters_client.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/robot_circuit.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/locations/locations.json" />
-        <option value="$PROJECT_DIR$/src/robot_router/src/robot_router.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py" />
+        <option value="$PROJECT_DIR$/src/robot_router/src/robot_router.py" />
         <option value="$PROJECT_DIR$/src/robot_router/src/robot_router_states.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="24" />
+    <option name="y" value="-1056" />
     <option name="width" value="1855" />
     <option name="height" value="1056" />
   </component>
@@ -583,7 +562,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
+    <frame x="65" y="-1056" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -993,22 +972,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="44" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="112" selection-start-line="44" selection-start-column="112" selection-end-line="44" selection-end-column="112" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit_states.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.6115289">
@@ -1017,10 +980,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_circuit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5112782">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="44" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34591195">
+          <caret line="32" column="126" selection-start-line="32" selection-start-column="126" selection-end-line="32" selection-end-column="126" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/robot_router/src/robot_router_states.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7704403">
-          <caret line="308" column="24" selection-start-line="308" selection-start-column="24" selection-end-line="308" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.43609023">
+          <caret line="299" column="36" selection-start-line="299" selection-start-column="36" selection-end-line="299" selection-end-column="36" />
           <folding>
             <element signature="e#22#33#0" expanded="true" />
           </folding>

@@ -29,8 +29,8 @@ def run_FB2():
     with sm:
         smach.StateMachine.add('S0_INITALISE', states.initialise(),
                                transitions={'proceed': 'S1_READ', 'wait': 'S0_INITALISE', 'error': 'ERR'})
-        smach.StateMachine.add('S1_READ', states.wait_for_control(),
-                               transitions={'proceed': 'S2_SET_GOAL', 'error': 'ERR', 'finished': 'S5_CLEANUP','wait':'S1_READ'})
+        smach.StateMachine.add('S1_READ', states.wait_for_location(),
+                               transitions={'proceed': 'S2_SET_GOAL', 'error': 'ERR', 'finished': 'S5_CLEANUP'})
         smach.StateMachine.add('S2_SET_GOAL', states.set_goal(),
                                transitions={'new_goal': 'S3_NAVIGATE', 'error': 'ERR'},
                                remapping={'read_request_goal': 'sm_request_goal', 'send_nav_goal': 'sm_nav_goal'})

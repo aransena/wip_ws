@@ -12,10 +12,9 @@ from move_base_msgs.msg import MoveBaseGoal
 from move_base_msgs.msg import MoveBaseAction
 from move_base_msgs.msg import MoveBaseActionFeedback
 from geometry_msgs.msg import PoseStamped
-from geometry_msgs.msg import Pose2D
-from std_msgs.msg import String
-from std_msgs.msg import Int8
 
+from std_msgs.msg import String
+from geometry_msgs.msg import Pose2D
 
 import os
 import json
@@ -231,30 +230,6 @@ class wait_for_location(smach.State):
             print "no goal received"
             return 'error'
 
-class wait_for_control(smach.State):
-    def __init__(self):
-        smach.State.__init__(self, outcomes=['proceed','wait', 'error', 'finished'])
-
-    def execute(self, userdata):
-        rospy.loginfo('Executing S1_READ')
-
-        try:
-            #rospy.Subscriber("/location_goal", String, callback_location)
-            rospy.wait_for_message("/control_level", Int8)
-            if control_level < 1:
-                return 'wait' # change to loop back on waiting
-            else:
-                if goal is None:
-                    return 'error'
-                else:
-                    return 'proceed'
-        except Exception as e:
-            print e
-            print "no control received"
-            return 'error'
-
-
-
 
 class set_goal(smach.State):
     def __init__(self):
@@ -297,7 +272,6 @@ class navigate(smach.State):
             print responses[self.client.get_state()]
             if control_level < 1:
                 self.client.cancel_all_goals()
-                return 'goal_reached'
 
             elif curr_nav_goal != goal:
                 print "NEW GOAL"
@@ -350,7 +324,6 @@ class monitor(smach.State):
             print responses[self.client.get_state()]
             if control_level < 1:
                 self.client.cancel_all_goals()
-                return 'goal_reached'
             elif curr_goal != goal:
                 curr_goal = goal
                 print "NEW GOAL"
