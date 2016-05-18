@@ -10,6 +10,12 @@ from std_msgs.msg import Int8
 heading = 0
 angle = 0
 controlLevel = 0
+requestLevel = 0
+active_device = 0
+
+TABLET_DEVICE_LEVEL=2
+SMARTPHONE_DEVICE_LEVEL=3
+WATCH_DEVICE_LEVEL=4
 
 # from std_msgs.msg import Int8 as Int
 
@@ -21,34 +27,36 @@ class twistMessage:
 
 def get_twist_msg(data):
     global controlLevel
-    #rospy.loginfo(str(data))
+    global heading
+    global angle
+    global requestLevel
+    device = ""
+    controlLevel = 0
+    vel = 0
+    heading = 0
     try:
         device = data['Device']
         controlLevel = data['ControlLevel']
+
     except:
-        device = ""
-        controlLevel = 0
-        vel = 0
-        heading = 0
+
         pass
 
-    global heading
-    global angle
-
+    #print controlLevel
 
 
     twist = Twist()
 
-    if controlLevel == 1:
+    if controlLevel>0:
         if device == "SmartPhone":
+            control_request_pub.publish(SMARTPHONE_DEVICE_LEVEL)
+            requestLevel = SMARTPHONE_DEVICE_LEVEL
             vel = float(data['VEL'])
             heading = float(data['ANGLE'])
-            #theta = float(data['ANGLE'])
-            #twist.linear.x = vel
-            #twist.angular.z = theta
-            #controlLevel = controlLevel-1
 
         else:
+            control_request_pub.publish(WATCH_DEVICE_LEVEL)
+            requestLevel=WATCH_DEVICE_LEVEL
             alpha = float(data['ALPHA'])
             beta = float(data['BETA'])
             bezelR = int(data['Clockwise'])
@@ -80,32 +88,40 @@ def get_twist_msg(data):
                             heading += 0.1
                         else:
                             heading = 1
-            else:
+
+            if controlLevel != 1:
                 vel = 0
                 heading = 0
-                controlLevel=0
-        #print vel, heading
-        twist.linear.x = vel  # twist_mem.linear_x
-        twist.angular.z = heading
+    #else:
+    #    control_request_pub.publish(0)
+            #controlLevel=0
+    #print vel, heading
 
-        twist.linear.y = 0
-        twist.linear.z = 0
-        twist.angular.x = 0
-        twist.angular.y = 0
+    if vel<0:
+            heading = heading * -1
 
-    else:
-        twist.linear.x = 0
-        twist.angular.z = 0
+    twist.linear.x = vel  # twist_mem.linear_x
+    twist.angular.z = heading
+
+    twist.linear.y = 0
+    twist.linear.z = 0
+    twist.angular.x = 0
+    twist.angular.y = 0
+
+    #else:
+    #    twist.linear.x = 0
+    #    twist.angular.z = 0
         #if device=="SmartPhone" and controlLevel!=0:
         #    controlLevel=controlLevel-1
 
-    print controlLevel
-    control_pub.publish(controlLevel)
+
     return twist
 
 
 def device_interface(json_str):
     global controlLevel
+    global requestLevel
+    global active_device
     try:
         data = json.loads(json_str.data)
     except:
@@ -120,19 +136,23 @@ def device_interface(json_str):
     print controlLevel
 
 
-    if not rospy.is_shutdown() and controlLevel==1:
-        print twist
-
-        # print "sending ", twist
+    if not rospy.is_shutdown() and active_device==requestLevel:
         #print twist
-        pub.publish(twist)
+        control_pub.publish(controlLevel)
+        if controlLevel==1:
+            pub.publish(twist)
+
+        rate.sleep()
 
 
 
-
+def get_active_device(data):
+    global active_device
+    active_device = data.data
 
 
 def listener():
+    rospy.Subscriber("active_device", Int8, get_active_device)
     rospy.Subscriber("websocket_server_msgs", ros_string, device_interface)
 
     rospy.spin()
@@ -142,13 +162,15 @@ if __name__ == "__main__":
 
     try:
         rospy.init_node('websocket_ROS_interface', anonymous=True)
+
         #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
         #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
-        pub = rospy.Publisher('cmd_vel', Twist)
-        control_pub = rospy.Publisher('control_level', Int8,latch=True)
+        pub = rospy.Publisher('cmd_vel', Twist,queue_size=1)
+        control_pub = rospy.Publisher('control_level', Int8,latch=True, queue_size=1)
+        control_request_pub = rospy.Publisher('control_request', Int8, latch=False, queue_size=1)
         # pub = rospy.Publisher('robbie/cmd_vel', Twist)
         # pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
-
+        rate = rospy.Rate(50) # 10hz
 
         listener()
 

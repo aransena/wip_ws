@@ -16,21 +16,24 @@ map_yaml = os.path.join(dir,'/opt/ros/indigo/share/turtlebot_gazebo/maps/playgro
 origin_offset_x = 0
 origin_offset_y = 0
 map_scale = 0
-
+print "\n---------------\n"
 f = open(map_yaml,'r')
 for line in f:
     if "origin" in line:
         origin_offset_x = float(line.split()[1][1:-1])
         origin_offset_y = float(line.split()[2][:-1])
-        print origin_offset_x, " ", origin_offset_y
+        print "offsets: ", origin_offset_x, " ", origin_offset_y
 
     if "resolution" in line:
         map_scale = float(line.split()[1])
+        print "map scale: ", (1/map_scale)
 
 f.close()
 
 bag = rosbag.Bag('test.bag')
+print "\n---------------\n"
 print bag
+print "\n---------------\n"
 X=[]
 Y=[]
 #map = OccupancyGrid()
@@ -66,7 +69,7 @@ for topic, msg, t in rosbag.Bag('test.bag').read_messages():
 
 bag.close()
 
-print dist_tot
+print "Distance travelled: ", round(dist_tot*map_scale, 2),"m"
 #X = X*1000
 #Y = Y*1000
 

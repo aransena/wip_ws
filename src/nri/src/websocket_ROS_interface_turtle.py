@@ -42,7 +42,9 @@ def get_twist_msg(data):
     if controlLevel == 1:
         if device == "SmartPhone":
             vel = float(data['VEL'])
+
             heading = float(data['ANGLE'])
+
             #theta = float(data['ANGLE'])
             #twist.linear.x = vel
             #twist.angular.z = theta
@@ -85,6 +87,9 @@ def get_twist_msg(data):
                 heading = 0
                 controlLevel=0
         #print vel, heading
+        if vel<0:
+                heading = heading * -1
+
         twist.linear.x = vel  # twist_mem.linear_x
         twist.angular.z = heading
 
