@@ -15,7 +15,7 @@ import tornado.web
 
 import json
 
-pub = rospy.Publisher('websocket_server_msgs', ros_string)
+# pub = rospy.Publisher('websocket_server_msgs', ros_string)
 outfile = open('data.txt', 'w')
 global heading
 global tilt
@@ -30,25 +30,26 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         global tilt
-        print message
-	if "LOCATION" in message:
+        #print "Message: ", message
+
+        if "LOCATION" in message:
             loc = message.split(",")[1]
-            print "GOTO: ",loc
+            #print "GOTO: ", loc
             loc_pub.publish(loc)
-	elif "UPDATE" in message:
+        elif "UPDATE" in message:
             loc = message.split(",")[1]
-            print "UPDATE: ",loc
+            #print "UPDATE: ", loc
             loc_update_pub.publish(loc)
         elif len(message) > 10:
             try:
                 msg = json.loads(message)
                 json.dump(msg, outfile)
-		pub.publish(str(message))
+                pub.publish(str(message))
             except:
                 message = ""
                 pass
         # print 'received message: %s\n' % json.loads(message)
-             
+
         elif message == "USER":
             print "Responding..."
             self.write_message(message)  # + ' OK')
@@ -67,12 +68,11 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             else:
                 send_tilt = tilt - 10
 
-
             kinect_pub.publish(send_tilt)
 
         else:
             try:
-                device = msg['Device']
+                device = message['Device']
                 if device == "SmartWatch":
                     global heading
                     try:
@@ -107,27 +107,24 @@ def tilt_angle_listener(angle):
 if __name__ == "__main__":
     try:
         global heading
-
         heading = 0
 
-        pub = rospy.Publisher('websocket_server_msgs', ros_string)
-	loc_pub = rospy.Publisher('location_goal', ros_string)
-	loc_update_pub = rospy.Publisher('trigger_location_save', ros_string)
-        kinect_pub = rospy.Publisher('tilt_angle', ros_float)
+        rospy.init_node('websocket_server', anonymous=True)
+
+        pub = rospy.Publisher('websocket_server_msgs', ros_string, queue_size=1)
+        loc_pub = rospy.Publisher('location_goal', ros_string, queue_size=1)
+        loc_update_pub = rospy.Publisher('trigger_location_save', ros_string, queue_size=1)
+        kinect_pub = rospy.Publisher('tilt_angle', ros_float, queue_size=1)
         rospy.Subscriber("/smooth_cmd_vel", Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
         rospy.Subscriber("/cur_tilt_angle", ros_float, tilt_angle_listener)  ###
-        rospy.init_node('websocket_server', anonymous=True)
-        rospy.loginfo("websocket_server started")
+
+
+        rospy.loginfo("Websocket server started")
 
         http_server = tornado.httpserver.HTTPServer(application)
-        try:
-            print(2)
-            # http_server.close_all_connections()
-            print(3)
-        except:
-            pass
         http_server.listen(8888)
         tornado.ioloop.IOLoop.instance().start()
+
 
     except Exception, e:
         print "Server Error ", e
