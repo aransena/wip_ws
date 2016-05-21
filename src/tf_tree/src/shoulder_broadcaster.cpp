@@ -8,7 +8,7 @@ void chatterCallback(const std_msgs::Float32::ConstPtr& msg);
 
 int main(int argc, char** argv){
 
-	ros::init(argc, argv, "shoulder_publisher_tf");
+	ros::init(argc, argv, "tf/shoulder_publisher_tf");
 	ros::NodeHandle n;
 
 	ros::Rate r(10);
