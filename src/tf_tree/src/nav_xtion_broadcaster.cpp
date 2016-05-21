@@ -4,7 +4,7 @@
 
 int main(int argc, char** argv){
 
-	ros::init(argc, argv, "nav_xtion_publisher_tf");
+	ros::init(argc, argv, "tf/nav_xtion_publisher_tf");
 	ros::NodeHandle n;
 
 	ros::Rate r(50);

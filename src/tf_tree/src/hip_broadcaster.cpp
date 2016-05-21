@@ -10,7 +10,7 @@
 
 int main(int argc, char** argv){
 
-	ros::init(argc, argv, "hip_publisher_tf");
+	ros::init(argc, argv, "tf/hip_publisher_tf");
 	ros::NodeHandle n;
 
 	ros::Rate r(10);
