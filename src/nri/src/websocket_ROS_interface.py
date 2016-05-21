@@ -144,9 +144,8 @@ if __name__ == "__main__":
     try:
         rospy.init_node('websocket_ROS_interface', anonymous=True)
         rospy.loginfo("Websocket server ROS interface started")
-        # pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
-        pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist, queue_size=1)
-        # pub = rospy.Publisher('cmd_vel', Twist,queue_size=1)
+        #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist, queue_size=1)
+        pub = rospy.Publisher('cmd_vel', Twist,queue_size=1)
         control_pub = rospy.Publisher('nri/control_level', Int8, latch=True, queue_size=1)
         control_request_pub = rospy.Publisher('nri/mux/control_request', Int8, latch=False, queue_size=1)
         # pub = rospy.Publisher('robbie/cmd_vel', Twist)
