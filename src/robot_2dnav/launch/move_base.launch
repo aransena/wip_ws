@@ -6,7 +6,6 @@
 	<node name="map_server" pkg="map_server" type="map_server" args="$(find robot_2dnav)/maps/map.yaml"/>
 	<!--<node name="map_server" pkg="map_server" type="map_server" args="/map.yaml"/>-->
 
-
 	<!-- Run AMCL -->
     <node name="amcl" pkg="amcl" type="amcl" respawn="true">
       <param name="odom_model_type" value="diff"/>

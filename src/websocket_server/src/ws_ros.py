@@ -46,8 +46,24 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                 json.dump(msg, outfile)
                 pub.publish(str(message))
             except:
-                message = ""
+                msg=""
                 pass
+
+            try:
+                device = msg['Device']
+                if device == "SmartWatch":
+                    global heading
+                    try:
+                        heading_msg = {u"heading": heading}
+                    except Exception, e:
+                        print "Error setting heading message: ", e
+                        pass
+                    self.write_message(json.dumps(heading_msg))
+            except Exception, e:
+
+                print "Error sending heading to watch: ", e
+                pass
+
         # print 'received message: %s\n' % json.loads(message)
 
         elif message == "USER":
@@ -70,20 +86,6 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
             kinect_pub.publish(send_tilt)
 
-        else:
-            try:
-                device = message['Device']
-                if device == "SmartWatch":
-                    global heading
-                    try:
-                        heading_msg = {u"heading": heading}
-                    except Exception, e:
-                        print e
-                        pass
-                    self.write_message(json.dumps(heading_msg))
-            except Exception, e:
-                print e
-                pass
 
 
 def on_close(self):
@@ -115,9 +117,9 @@ if __name__ == "__main__":
         loc_pub = rospy.Publisher('location_goal', ros_string, queue_size=1)
         loc_update_pub = rospy.Publisher('trigger_location_save', ros_string, queue_size=1)
         kinect_pub = rospy.Publisher('tilt_angle', ros_float, queue_size=1)
-        rospy.Subscriber("/smooth_cmd_vel", Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
+        #rospy.Subscriber("/smooth_cmd_vel", Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
+        rospy.Subscriber('/cmd_vel_mux/input/teleop', Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
         rospy.Subscriber("/cur_tilt_angle", ros_float, tilt_angle_listener)  ###
-
 
         rospy.loginfo("Websocket server started")
 
