@@ -241,7 +241,7 @@ class wait_for_control(smach.State):
         try:
             #rospy.Subscriber("/location_goal", String, callback_location)
             rospy.wait_for_message("/control_level", Int8)
-            if control_level < 1:
+            if control_level <= 1:
                 return 'wait' # change to loop back on waiting
             else:
                 if goal is None:

@@ -16,6 +16,7 @@ from geometry_msgs.msg import Pose2D
 global location
 
 def callback_curr_pos(data):
+    print "DATA: ", data
     global location
     location = Pose2D()
     position = data.feedback.base_position.pose.position
@@ -26,14 +27,15 @@ def callback_curr_pos(data):
 
     euler = tf.transformations.euler_from_quaternion(quaternion)
     location.theta=euler[2]
+    #print location.x, location.y, location.theta
     #print math.degrees(euler[2])
 
 
 def callback_location_save(data):
     name = data.data
     global location
-    print name
-    print location
+    #print name
+    #print location
     msg = {"Name": name,"X": location.x,"Y": location.y,"Theta": location.theta}
 
     location_file = os.path.join(dir, 'locations/locations.json')
@@ -60,8 +62,8 @@ def callback_location_save(data):
 
     #f = open('/home/aransena/wip_ws/src/robot_router/locations/locations.json', 'r')
 
-    jdata = json.loads(open(location_file).read())
-    print jdata
+    #jdata = json.loads(open(location_file).read())
+    #print jdata
     #print "Home" in jdata
 
     #    print "Home"==l['Name']
