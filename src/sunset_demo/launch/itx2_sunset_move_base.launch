@@ -1,32 +1,10 @@
 <launch>
-    <machine name="itx1" address="wip-itx1" env-loader="/opt/ros/indigo/env.sh" user="itx1"/>
-    <machine name="itx2" address="wip-itx2" env-loader="/opt/ros/indigo/env_mod.sh" user="itx2"/>
 
-    <!-- itx2 startup (Low Level: Motor Control) -->
-    <!-- rosrun nodes on itx2 -->
+    <include file="$(find sunset_demo)/launch/itx2_base.launch"/>
 
-    <node name="hokuyo" pkg="hokuyo_node" type="hokuyo_node" respawn="false" output="screen">
-        <param name="calibrate_time" type="bool" value="false"/>
-        <param name="port" type="string" value="/dev/ttyACM0"/>
-        <param name="intensity" type="bool" value="false"/>
-    </node>
+    <include file="$(find robot_2dnav)/launch/move_base.launch"/>
 
-    <!-- roslaunch nodes on itx2 -->
-    <include file="$(find yocs_velocity_smoother)/launch/standalone.launch">
-        <arg name="raw_cmd_vel_topic" value="cmd_vel"/>
-    </include>
 
-    <include file="$(find robot_2dnav)/launch/move_base.launch">
-        <arg name="machine" value="itx2"/>
-    </include>
-    
-    <include file="$(find robot_2dnav)/launch/robot_configuration_mod.launch"/>
-
-    <include file="$(find low_level_wip)/launch/lowlevel.launch">
-        <arg name="machine" value="itx2"/>
-	<arg name="cmd_topic" value="smooth_cmd_vel"/>
-
-    </include>
 
 
 </launch>

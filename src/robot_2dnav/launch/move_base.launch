@@ -1,18 +1,13 @@
 
 <launch>
-	
-	<!-- Start ros master if required -->
-	<master auto="start"/>
 
-	<arg name="machine" default="itx2"/>
 
 	<!-- Run the map server -->
 	<node name="map_server" pkg="map_server" type="map_server" args="$(find robot_2dnav)/maps/map.yaml"/>
 	<!--<node name="map_server" pkg="map_server" type="map_server" args="/map.yaml"/>-->
 
-
 	<!-- Run AMCL -->
-    <node machine="$(arg machine)" name="amcl" pkg="amcl" type="amcl" respawn="true">
+    <node name="amcl" pkg="amcl" type="amcl" respawn="true">
       <param name="odom_model_type" value="diff"/>
       <param name="odom_alpha5" value="0.1"/>
       <param name="gui_publish_rate" value="10.0"/>
@@ -48,12 +43,14 @@
 
 
 	<!-- Load Parameters -->
-	<node machine="$(arg machine)" pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
+	<node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
 		<rosparam file="$(find robot_2dnav)/params/costmap_common_params.yaml" command="load" ns="global_costmap" />
 		<rosparam file="$(find robot_2dnav)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
 		<rosparam file="$(find robot_2dnav)/params/local_costmap_params.yaml" command="load"/>
 		<rosparam file="$(find robot_2dnav)/params/global_costmap_params.yaml" command="load"/>
-		<rosparam file="$(find robot_2dnav)/params/base_local_planner_params.yaml" command="load"/>
+		<rosparam file="$(find robot_2dnav)/params/move_base_params.yaml" command="load"/>
+		<!--<rosparam file="$(find robot_2dnav)/params/base_local_planner_params.yaml" command="load"/>-->
+		<rosparam file="$(find robot_2dnav)/params/dwa_local_planner_params.yaml" command="load"/>
 		<param name="controller_frequency" value="50" type="double"/>
 		<param name="planner_frequency" value="5"/>
 		<param name="oscillation_reset_dist" value="0.01" type="double"/>

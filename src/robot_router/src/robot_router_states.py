@@ -170,7 +170,7 @@ rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_po
 rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
 rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
 rospy.Subscriber("/location_goal", String, callback_location)
-rospy.Subscriber("/control_level", Int8, callback_control_level)
+rospy.Subscriber("/nri/control_level", Int8, callback_control_level)
 
 #rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
 #rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
@@ -239,8 +239,7 @@ class wait_for_control(smach.State):
         rospy.loginfo('Executing S1_READ')
 
         try:
-            #rospy.Subscriber("/location_goal", String, callback_location)
-            rospy.wait_for_message("/control_level", Int8)
+            rospy.wait_for_message("/nri/control_level", Int8)
             if control_level <= 1:
                 return 'wait' # change to loop back on waiting
             else:
@@ -285,7 +284,6 @@ class navigate(smach.State):
         global control_level
         global goal
         rospy.loginfo('Executing state S3_NAVIGATE')
-        # time.sleep(1)
 
         self.client.wait_for_server()
         #rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
@@ -295,7 +293,7 @@ class navigate(smach.State):
 
         while (self.client.wait_for_result(rospy.Duration(1.0)) != True):
             print responses[self.client.get_state()]
-            if control_level < 1:
+            if control_level <= 1:
                 self.client.cancel_all_goals()
                 return 'goal_reached'
 
@@ -303,11 +301,7 @@ class navigate(smach.State):
                 print "NEW GOAL"
                 self.client.cancel_all_goals()
 
-                #return 'new_goal'
-
-
         result = self.client.get_state()
-
 
         if result == MB_SUCCESS:  ## success
             at_waypoint()
@@ -316,7 +310,6 @@ class navigate(smach.State):
             return 'new_goal'
         elif result == MB_REJECTED:
             userdata.intervention=True
-            #print userdata.intervention
             return 'intervention'
         else:
             return 'error'
@@ -335,8 +328,6 @@ class monitor(smach.State):
         global control_level
 
         rospy.loginfo('Executing state S3B_MONITOR')
-        # time.sleep(1)
-        #self.client.wait_for_server()
 
         self.client.wait_for_server()
         #rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
@@ -346,18 +337,15 @@ class monitor(smach.State):
 
         goal = curr_goal
 
-        while (self.client.wait_for_result(rospy.Duration(1.0)) != True):
+        while not self.client.wait_for_result(rospy.Duration(1.0)):
             print responses[self.client.get_state()]
-            if control_level < 1:
+            if control_level <= 1:
                 self.client.cancel_all_goals()
                 return 'goal_reached'
             elif curr_goal != goal:
                 curr_goal = goal
                 print "NEW GOAL"
                 self.client.cancel_all_goals()
-
-                #return 'new_goal'
-
 
         result = self.client.get_state()
         print "RESULT: ", result
@@ -369,25 +357,19 @@ class monitor(smach.State):
             return 'new_goal'
         elif result == MB_REJECTED:
             userdata.intervention=True
-            #print userdata.intervention
             return 'intervention'
         else:
             return 'error'
 
+
 class cleanup(smach.State):
+
     def __init__(self):
         smach.State.__init__(self, outcomes=['success_end', 'fail_end', 'error'])
 
     def execute(self, userdata):
         rospy.loginfo('Executing state S5_CLEANUP')
         return 'success_end'
-        # time.sleep(1)
-        # if random.random() < 0.5:
-        #    return 'success_end'
-        # elif random.random() < 0.9:
-        #    return 'fail_end'
-        # else:
-        #    return 'error'
 
 
 class error_handler(smach.State):
