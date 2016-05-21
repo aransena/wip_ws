@@ -5,7 +5,7 @@
 
 int main(int argc, char** argv){
 
-	ros::init(argc, argv, "percept_kinect_publisher_tf");
+	ros::init(argc, argv, "tf/percept_kinect_publisher_tf");
 	ros::NodeHandle n;
 
 	ros::Rate r(10);
