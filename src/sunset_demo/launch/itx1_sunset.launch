@@ -21,7 +21,7 @@
     <node pkg="nri" type="websocket_ROS_interface.py" name="ws_ros_interface"
           respawn="true"/> <!-- converts JSON to ROS messages -->
     <node pkg="nri" type="move_base_parameters_client.py" name="parameters_client"
-          respawn="false"/> <!-- dynamically adjust move base parameters-->
+          respawn="true"/> <!-- dynamically adjust move base parameters-->
     <node pkg="nri" type="joy_ROS_interface.py" name="joystick_interface"
           respawn="false"/> <!-- xbox controller interface -->
     <node pkg="nri" type="global_multiplexer.py" name="nri_multiplexer"
