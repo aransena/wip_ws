@@ -39,6 +39,8 @@ def get_twist_msg(data, twist_mem):
     twist = Twist()
 
     if controlLevel == 1 or device == "SmartWatch":
+	pub = rospy.Publisher('cmd_vel', Twist)
+
         if device == "SmartPhone":
             vel = float(data['VEL'])
             theta = float(data['ANGLE'])
@@ -91,6 +93,10 @@ def get_twist_msg(data, twist_mem):
             twist.angular.y = 0
 
     else:
+	try:
+		pub.unregister()
+	except:
+		pass
         twist.linear.x = 0
         twist_mem.linear_x = 0
         twist.angular.z = 0
@@ -121,6 +127,7 @@ def watch_interface(json_str, twist_mem):
         twist = get_twist_msg(data, twist_mem)
 
     if not rospy.is_shutdown():
+	
         # print "sending ", twist
         pub.publish(twist)
 
