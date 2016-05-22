@@ -1,14 +1,14 @@
 <launch>
-    <node pkg="tf_tree" type="hip_broadcaster" name="hip_publisher_tf" />
-    <node pkg="tf_tree" type="nav_xtion_broadcaster" name="nav_xtion_publisher_tf" />
+    <node pkg="tf_tree" type="hip_broadcaster" name="tf/hip_publisher_tf" />
+    <node pkg="tf_tree" type="nav_xtion_broadcaster" name="tf/nav_xtion_publisher_tf" />
     <!-- <node pkg="tf_tree" type="odom_tf_broadcaster" name="odometry_publisher_tf" /> -->
-    <node pkg="tf_tree" type="percept_kinect_broadcaster" name="percept_kinect_publisher_tf" />
+    <node pkg="tf_tree" type="percept_kinect_broadcaster" name="tf/percept_kinect_publisher_tf" />
     <node pkg="tf_tree" type= "test_zaxis_pub" name="z_axis_talker" />
     <!-- <node pkg="tf_tree" type= "tf_listener" name="tf_listener" /> -->
-    <node pkg="tf_tree" type="shoulder_broadcaster" name="shoulder_publisher_tf" />
-    <node pkg="tf_tree" type="wrist_broadcaster" name="wrist_publisher_tf" />
-    <node pkg="tf_tree" type="hand_broadcaster" name="hand_publisher_tf" />
+    <node pkg="tf_tree" type="shoulder_broadcaster" name="tf/shoulder_publisher_tf" />
+    <node pkg="tf_tree" type="wrist_broadcaster" name="tf/wrist_publisher_tf" />
+    <node pkg="tf_tree" type="hand_broadcaster" name="tf/hand_publisher_tf" />
     <!-- <node pkg="tf_tree" type="new_global_broadcaster" name="new_global_publisher_tf" /> -->
-    <node pkg="tf_tree" type="laser_broadcaster" name="laser_publisher_tf" />
+    <node pkg="tf_tree" type="laser_broadcaster" name="tf/laser_publisher_tf" />
 
   </launch>
