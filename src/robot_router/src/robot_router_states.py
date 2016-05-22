@@ -169,8 +169,8 @@ def callback_control_level(data):
 rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
 rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
 rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
-rospy.Subscriber("/location_goal", String, callback_location)
-rospy.Subscriber("/nri/control_level", Int8, callback_control_level)
+rospy.Subscriber("/nri_system/location_goal", String, callback_location)
+rospy.Subscriber("/nri_system/control_level", Int8, callback_control_level)
 
 #rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
 #rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
@@ -239,7 +239,7 @@ class wait_for_control(smach.State):
         rospy.loginfo('Executing S1_READ')
 
         try:
-            rospy.wait_for_message("/nri/control_level", Int8)
+            rospy.wait_for_message("/nri_system/control_level", Int8)
             if control_level <= 1:
                 return 'wait' # change to loop back on waiting
             else:

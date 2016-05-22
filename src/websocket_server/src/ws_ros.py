@@ -117,8 +117,8 @@ if __name__ == "__main__":
         loc_pub = rospy.Publisher('location_goal', ros_string, queue_size=1)
         loc_update_pub = rospy.Publisher('trigger_location_save', ros_string, queue_size=1)
         kinect_pub = rospy.Publisher('tilt_angle', ros_float, queue_size=1)
-        #rospy.Subscriber("/smooth_cmd_vel", Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
-        rospy.Subscriber('/cmd_vel_mux/input/teleop', Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
+        rospy.Subscriber("/smooth_cmd_vel", Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
+        #rospy.Subscriber('/cmd_vel_mux/input/teleop', Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
         rospy.Subscriber("/cur_tilt_angle", ros_float, tilt_angle_listener)  ###
 
         rospy.loginfo("Websocket server started")

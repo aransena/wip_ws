@@ -1,0 +1,8 @@
+<launch>
+
+
+    <include file="$(find sunset_demo)/launch/itx2_base.launch"/>
+
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping" respawn="false"/>
+
+</launch>

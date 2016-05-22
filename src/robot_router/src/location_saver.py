@@ -79,7 +79,7 @@ if __name__ == '__main__':
     try:
         #rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
         rospy.Subscriber("/amcl_pose",  PoseWithCovarianceStamped,callback_curr_pos)
-        rospy.Subscriber("/trigger_location_save", String, callback_location_save)  ###
+        rospy.Subscriber("/nri_system/trigger_location_save", String, callback_location_save)  ###
         rospy.init_node('location_saver', anonymous=True)
 
         rospy.spin()
