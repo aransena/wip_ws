@@ -1,8 +1,8 @@
 <launch>
 
-    <include file="$(find sunset_demo)/launch/itx2_base.launch"/>
-    <include file="$(find robot_2dnav)/launch/amcl_launch.launch"/>
-    <include file="$(find robot_2dnav)/launch/move_base.launch"/>
+    <include file="$(find sunset_demo)/launch/2_itx2/itx2_base.launch"/>
+    <include file="$(find robot_2dnav)/launch/2_itx2/amcl_launch.launch"/>
+    <include file="$(find robot_2dnav)/launch/2_itx2/move_base.launch"/>
 
 
 
