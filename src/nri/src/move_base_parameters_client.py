@@ -29,7 +29,7 @@ if __name__ == "__main__":
         #client = dynamic_reconfigure.client.Client("/move_base/DWAPlannerROS", timeout=30, config_callback=callback_config)
 	client = dynamic_reconfigure.client.Client("/move_base/TrajectoryPlannerROS", timeout=30, config_callback=callback_config)
         rospy.init_node("move_base_parameters_client")
-        rospy.Subscriber("/control_level", Int8, callback_control_change)
+        rospy.Subscriber("/nri_system/control_level", Int8, callback_control_change)
 
         rospy.spin()
     except Exception as e:

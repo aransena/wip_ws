@@ -9,9 +9,9 @@
     <!-- rosrun nodes on itx1 -->
     <group name="AUX Systems">
     <node pkg="web_video_server" type="web_video_server" name="web_video_server"
-          respawn="true"/> <!-- server for streaming video to HRI devices -->
+          respawn="true" ns="aux"/> <!-- server for streaming video to HRI devices -->
     <node pkg="kinect_aux2" type="kinect_aux_node_mod" name="kinect_aux"
-          respawn="false"/> <!-- server for streaming video to HRI devices -->
+          respawn="false" ns="aux"/> <!-- server for streaming video to HRI devices -->
     </group>
 
     <group name="NRI Systems">
@@ -19,20 +19,20 @@
           respawn="false"/> <!-- server for HRI device comms -->
 
     <node pkg="nri" type="websocket_ROS_interface.py" name="ws_ros_interface"
-          respawn="true"/> <!-- converts JSON to ROS messages -->
+          respawn="true" ns="nri"/> <!-- converts JSON to ROS messages -->
     <node pkg="nri" type="move_base_parameters_client.py" name="parameters_client"
-          respawn="true"/> <!-- dynamically adjust move base parameters-->
+          respawn="true" ns="nri"/> <!-- dynamically adjust move base parameters-->
     <node pkg="nri" type="joy_ROS_interface.py" name="joystick_interface"
-          respawn="false"/> <!-- xbox controller interface -->
+          respawn="false" ns="nri"/> <!-- xbox controller interface -->
     <node pkg="nri" type="global_multiplexer.py" name="nri_multiplexer"
-          respawn="false"/> <!-- multiplexer for device management -->
+          respawn="false" ns="nri"/> <!-- multiplexer for device management -->
     </group>
 
     <group name="Navigation Interface">
     <node pkg="robot_router" type="robot_router.py" name="robot_router"
-          respawn="false"/> <!-- navigation system interface system -->
+          respawn="false" ns="nav_interface"/> <!-- navigation system interface system -->
     <node pkg="robot_router" type="location_saver.py" name="location_saver"
-          respawn="false"/> <!-- location updater node-->
+          respawn="false" ns="nav_interface"/> <!-- location updater node-->
     </group>
 
 

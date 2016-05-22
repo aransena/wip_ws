@@ -186,7 +186,7 @@ def wheelsOdomSendCmd():
 		
 			x = linearVelocityCmd        # m/s
 			th = angularVelocityCmd      # rad/s
-			rospy.loginfo ("Linear cmd %f , angular cmd %f", x, th)
+			#rospy.loginfo ("Linear cmd %f , angular cmd %f", x, th)
 
 			if x == 0:
 				# Turn in place
