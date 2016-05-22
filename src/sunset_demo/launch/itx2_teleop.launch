@@ -1,6 +1,0 @@
-<launch>
-
- <include file="$(find sunset_demo)/launch/itx2_base.launch"/>
-
-
-</launch>
