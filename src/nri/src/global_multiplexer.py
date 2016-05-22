@@ -81,8 +81,8 @@ if __name__ == "__main__":
 
     try:
         rospy.init_node('nri_multiplexer', anonymous=True)
-        pub = rospy.Publisher('nri/mux/active_device', Int8, latch=True, queue_size=1)
-        rospy.Subscriber("nri/mux/control_request", Int8, control_request)
+        pub = rospy.Publisher('mux/active_device', Int8, latch=True, queue_size=1)
+        rospy.Subscriber("mux/control_request", Int8, control_request)
 
         timer = ControlTimeout(5, control_timeout)
         rospy.loginfo("NRI Multiplexer Active")

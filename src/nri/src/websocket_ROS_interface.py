@@ -134,7 +134,7 @@ def get_active_device(data):
 
 
 def listener():
-    rospy.Subscriber("nri/mux/active_device", Int8, get_active_device)
+    rospy.Subscriber("mux/active_device", Int8, get_active_device)
     rospy.Subscriber("websocket_server_msgs", ros_string, device_interface)
     rospy.spin()
 
@@ -146,8 +146,8 @@ if __name__ == "__main__":
         rospy.loginfo("Websocket server ROS interface started")
         #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist, queue_size=1)
         pub = rospy.Publisher('cmd_vel', Twist,queue_size=1)
-        control_pub = rospy.Publisher('nri/control_level', Int8, latch=True, queue_size=1)
-        control_request_pub = rospy.Publisher('nri/mux/control_request', Int8, latch=False, queue_size=1)
+        control_pub = rospy.Publisher('control_level', Int8, latch=True, queue_size=1)
+        control_request_pub = rospy.Publisher('mux/control_request', Int8, latch=False, queue_size=1)
         # pub = rospy.Publisher('robbie/cmd_vel', Twist)
         # pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
         rate = rospy.Rate(50)  # 10hz
