@@ -35,8 +35,6 @@ def get_twist_msg(data):
     global heading
     global angle
 
-
-
     twist = Twist()
 
     if controlLevel == 1:
@@ -73,7 +71,6 @@ def get_twist_msg(data):
                         else:
                             heading = -1
 
-
                 elif bezelL == 1:
                     if heading < 0:
                         heading = 0
@@ -87,11 +84,12 @@ def get_twist_msg(data):
                 heading = 0
                 controlLevel=0
         #print vel, heading
+        heading_cmd = heading
         if vel<0:
-                heading = heading * -1
+                heading_cmd = heading * -1
 
         twist.linear.x = vel  # twist_mem.linear_x
-        twist.angular.z = heading
+        twist.angular.z = heading_cmd
 
         twist.linear.y = 0
         twist.linear.z = 0
@@ -101,6 +99,8 @@ def get_twist_msg(data):
     else:
         twist.linear.x = 0
         twist.angular.z = 0
+        heading = 0
+
         #if device=="SmartPhone" and controlLevel!=0:
         #    controlLevel=controlLevel-1
 
@@ -131,6 +131,7 @@ def device_interface(json_str):
         # print "sending ", twist
         #print twist
         pub.publish(twist)
+        pub2.publish(twist)
 
 
 
@@ -149,8 +150,9 @@ if __name__ == "__main__":
         rospy.init_node('websocket_ROS_interface', anonymous=True)
         #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
         pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
+        pub2 = rospy.Publisher('/smooth_cmd_vel', Twist)
         #pub = rospy.Publisher('cmd_vel', Twist)
-        control_pub = rospy.Publisher('control_level', Int8,latch=True)
+        control_pub = rospy.Publisher('/nri_system/control_level', Int8,latch=True)
         # pub = rospy.Publisher('robbie/cmd_vel', Twist)
         # pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
 
