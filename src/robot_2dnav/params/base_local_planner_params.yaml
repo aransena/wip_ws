@@ -16,5 +16,5 @@ TrajectoryPlannerROS:
   vtheta_samples: 50
   heading_lookahead: 3.0  
   holonomic_robot: false
-  yaw_goal_tolerance: 0.5
-  xy_goal_tolerance: 0.2
+  yaw_goal_tolerance: 1.0
+  xy_goal_tolerance: 0.3

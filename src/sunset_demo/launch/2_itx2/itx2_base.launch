@@ -6,9 +6,8 @@
             <param name="intensity" type="bool" value="false"/>
     </node>
 
-        <include file="$(find robot_2dnav)/launch/robot_configuration_mod.launch"/>
+        <include file="$(find robot_2dnav)/launch/itx2_robot_configuration.launch"/>
 
-    <group name="Low Level System">
         <include file="$(find yocs_velocity_smoother)/launch/standalone.launch">
             <arg name="raw_cmd_vel_topic" value="nri_system/cmd_vel"/>
         </include>
@@ -16,6 +15,5 @@
         <include file="$(find low_level_wip)/launch/lowlevel.launch">
             <arg name="cmd_topic" value="smooth_cmd_vel"/>
         </include>
-    </group>
 
 </launch>
