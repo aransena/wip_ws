@@ -11,8 +11,6 @@ import tf
 from move_base_msgs.msg import MoveBaseGoal
 from move_base_msgs.msg import MoveBaseAction
 from move_base_msgs.msg import MoveBaseActionFeedback
-from actionlib_msgs.msg import GoalStatusArray
-
 from geometry_msgs.msg import PoseStamped
 from geometry_msgs.msg import Pose2D
 from std_msgs.msg import String
@@ -34,8 +32,6 @@ MB_ABORTED = 4
 global goal
 global curr_goal
 global control_level
-global loc_name
-loc_name = ""
 stop = bool
 benchmark_state = 0
 
@@ -58,33 +54,31 @@ def at_waypoint():
     #    print "Service call failed: %s" % e
 
 
-# def callback_goal(data):
-#     #print data
-#     global goal
-#     goal = MoveBaseGoal()
-#     goal.target_pose.header.frame_id = 'map'
-#
-#     #goal.target_pose = data
-#     goal.target_pose.header.stamp = rospy.Time.now()
-#
-#     goal.target_pose.pose.position.x = data.x
-#     goal.target_pose.pose.position.y = data.y
-#
-#     radians = math.radians(data.theta)
-#     quaternion = tf.transformations.quaternion_from_euler(0, 0, radians) # roll, pitch, yaw
-#
-#     goal.target_pose.pose.orientation.x = quaternion[0]
-#     goal.target_pose.pose.orientation.y = quaternion[1]
-#     goal.target_pose.pose.orientation.z = quaternion[2]
-#     goal.target_pose.pose.orientation.w = quaternion[3]
-#     print "RECEIVED GOAL" #goal  # goal = data
+def callback_goal(data):
+    #print data
+    global goal
+    goal = MoveBaseGoal()
+    goal.target_pose.header.frame_id = 'map'
+
+    #goal.target_pose = data
+    goal.target_pose.header.stamp = rospy.Time.now()
+
+    goal.target_pose.pose.position.x = data.x
+    goal.target_pose.pose.position.y = data.y
+
+    radians = math.radians(data.theta)
+    quaternion = tf.transformations.quaternion_from_euler(0, 0, radians) # roll, pitch, yaw
+
+    goal.target_pose.pose.orientation.x = quaternion[0]
+    goal.target_pose.pose.orientation.y = quaternion[1]
+    goal.target_pose.pose.orientation.z = quaternion[2]
+    goal.target_pose.pose.orientation.w = quaternion[3]
+    print "RECEIVED GOAL" #goal  # goal = data
 
 
 def callback_location(data):
     global goal
     goal = MoveBaseGoal()
-    global loc_name
-    loc_name = data.data
 
     location_file = os.path.join(dir, 'locations/locations.json')
     locdata = json.loads(open(location_file).read())
@@ -172,14 +166,11 @@ def callback_control_level(data):
     control_level = data.data
 
 
-
-
 rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
 rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
-#rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
+rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
 rospy.Subscriber("/nri_system/location_goal", String, callback_location)
 rospy.Subscriber("/nri_system/control_level", Int8, callback_control_level)
-nav_msg_pub = rospy.Publisher('nav_msgs_pub', String, queue_size=1)
 
 #rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
 #rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
@@ -205,40 +196,40 @@ class initialise(smach.State):
             print "PREPARE not received"
 
 
-# class wait_for_point(smach.State):
-#     def __init__(self):
-#         smach.State.__init__(self, outcomes=['proceed', 'error', 'finished'])
-#
-#     def execute(self, userdata):
-#         rospy.loginfo('Executing S1_READ')
-#
-#         try:
-#             #rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
-#             rospy.wait_for_message("/nav_goal", Pose2D)
-#             return 'proceed'
-#         except Exception as e:
-#             print e
-#             print "no goal received"
-#             return 'error'
+class wait_for_point(smach.State):
+    def __init__(self):
+        smach.State.__init__(self, outcomes=['proceed', 'error', 'finished'])
 
-#class wait_for_location(smach.State):
-#    def __init__(self):
-#        smach.State.__init__(self, outcomes=['proceed', 'error', 'finished'])
+    def execute(self, userdata):
+        rospy.loginfo('Executing S1_READ')
 
-#    def execute(self, userdata):
-#        rospy.loginfo('Executing S1_READ')
+        try:
+            #rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
+            rospy.wait_for_message("/nav_goal", Pose2D)
+            return 'proceed'
+        except Exception as e:
+            print e
+            print "no goal received"
+            return 'error'
 
-#        try:
-#            #rospy.Subscriber("/location_goal", String, callback_location)
-#            rospy.wait_for_message("/location_goal", String)
-#            if goal is None:
-#                return 'error' # change to loop back on waiting
-#            else:
-#                return 'proceed'
-#        except Exception as e:
-#            print e
-#            print "no goal received"
-#            return 'error'
+class wait_for_location(smach.State):
+    def __init__(self):
+        smach.State.__init__(self, outcomes=['proceed', 'error', 'finished'])
+
+    def execute(self, userdata):
+        rospy.loginfo('Executing S1_READ')
+
+        try:
+            #rospy.Subscriber("/location_goal", String, callback_location)
+            rospy.wait_for_message("/location_goal", String)
+            if goal is None:
+                return 'error' # change to loop back on waiting
+            else:
+                return 'proceed'
+        except Exception as e:
+            print e
+            print "no goal received"
+            return 'error'
 
 class wait_for_control(smach.State):
     def __init__(self):
@@ -281,21 +272,6 @@ class set_goal(smach.State):
             return 'error'
 
 
-def process_result(result):
-    if result == MB_SUCCESS:  ## success
-        at_waypoint()
-        nav_msg_pub.publish("NAV I'm at my goal location!")
-        return 'goal_reached'
-    elif result == MB_ABORTED:
-        nav_msg_pub.publish("NAV I'm lost, please help")
-        return 'new_goal'
-    elif result == MB_REJECTED:
-        nav_msg_pub.publish("NAV New goal received")
-        return 'intervention'
-    else:
-        return 'error'
-
-
 class navigate(smach.State):
     def __init__(self):
         smach.State.__init__(self, outcomes=['goal_reached', 'error', 'timeout', 'new_goal','intervention'],
@@ -307,7 +283,6 @@ class navigate(smach.State):
     def execute(self, userdata):
         global control_level
         global goal
-        global loc_name
         rospy.loginfo('Executing state S3_NAVIGATE')
 
         self.client.wait_for_server()
@@ -318,8 +293,6 @@ class navigate(smach.State):
 
         while (self.client.wait_for_result(rospy.Duration(1.0)) != True):
             print responses[self.client.get_state()]
-            nav_msg = "NAV I'm on my way... Goal: " +loc_name+" Speed: " + str(control_level-1)
-            nav_msg_pub.publish(nav_msg)
             if control_level <= 1:
                 self.client.cancel_all_goals()
                 return 'goal_reached'
@@ -329,12 +302,18 @@ class navigate(smach.State):
                 self.client.cancel_all_goals()
 
         result = self.client.get_state()
-        outcome = process_result(result)
-        if outcome == 'intervention':
+
+        if result == MB_SUCCESS:  ## success
+            at_waypoint()
+            return 'goal_reached'
+        elif result == MB_ABORTED:
+            lost_pub.publish("LOST")
+            return 'new_goal'
+        elif result == MB_REJECTED:
             userdata.intervention=True
-        return outcome
-
-
+            return 'intervention'
+        else:
+            return 'error'
 
 class monitor(smach.State):
     def __init__(self):
@@ -360,8 +339,6 @@ class monitor(smach.State):
         goal = curr_goal
 
         while not self.client.wait_for_result(rospy.Duration(1.0)):
-            nav_msg = "NAV I'm on my way... \nGoal: " +loc_name+"\nSpeed: " + str(control_level-1)
-            nav_msg_pub.publish(nav_msg)
             print responses[self.client.get_state()]
             if control_level <= 1:
                 self.client.cancel_all_goals()
@@ -372,11 +349,18 @@ class monitor(smach.State):
                 self.client.cancel_all_goals()
 
         result = self.client.get_state()
-        outcome = process_result(result)
-        if outcome == 'intervention':
-            userdata.intervention=True
-        return outcome
+        print "RESULT: ", result
 
+        if result == MB_SUCCESS:  ## success
+            at_waypoint()
+            return 'goal_reached'
+        elif result == MB_ABORTED:
+            return 'new_goal'
+        elif result == MB_REJECTED:
+            userdata.intervention=True
+            return 'intervention'
+        else:
+            return 'error'
 
 
 class cleanup(smach.State):
