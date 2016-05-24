@@ -14,7 +14,7 @@ import move_base_msgs.msg as MB
 
 ##### main #####
 
-def run_FB2():
+def run_sm():
     # smach state machine
     rospy.init_node('smach_routing_state_machine')
 
@@ -49,7 +49,7 @@ def run_FB2():
         smach.StateMachine.add('ERR', states.error_handler(),
                                transitions={'exit': 'task_error'})  # error handling state
 
-    sis = smach_ros.IntrospectionServer('server_name', sm, '/SM_NAVIGATION_FB2')
+    sis = smach_ros.IntrospectionServer('server_name', sm, '/ROBOT_ROUTER_SYS')
 
 
     sis.start()  # execute SM
@@ -58,4 +58,4 @@ def run_FB2():
     return outcome
 
 if __name__ == '__main__':
-    run_FB2()
+    run_sm()
