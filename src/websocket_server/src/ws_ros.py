@@ -19,26 +19,41 @@ import json
 outfile = open('data.txt', 'w')
 global heading
 global tilt
+global lost
+lost = False
 
+clients=[]
+
+def send_to_all_clients(msg):
+    for client in clients:
+        print "Sending: ", msg
+        client.write_message(msg)
 
 class WSHandler(tornado.websocket.WebSocketHandler):
     def check_origin(self, origin):
         return True
 
+
     def open(self):
         print 'user is connected.\n'
+        send_to_all_clients("new client")
+        clients.append(self)
+
+    def send_msg(self, msg):
+        print 'user is connected.\n'
+        self.write_message(msg)
 
     def on_message(self, message):
         global tilt
-        #print "Message: ", message
-
+        m = "Message: ", message
+        rospy.loginfo(m)
         if "LOCATION" in message:
             loc = message.split(",")[1]
-            #print "GOTO: ", loc
+            # print "GOTO: ", loc
             loc_pub.publish(loc)
         elif "UPDATE" in message:
             loc = message.split(",")[1]
-            #print "UPDATE: ", loc
+            # print "UPDATE: ", loc
             loc_update_pub.publish(loc)
         elif len(message) > 10:
             try:
@@ -46,7 +61,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                 json.dump(msg, outfile)
                 pub.publish(str(message))
             except:
-                msg=""
+                msg = ""
                 pass
 
             try:
@@ -71,28 +86,27 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             self.write_message(message)  # + ' OK')
 
         elif message == "TILT_UP":
-            if tilt + 10 > -15:
-                send_tilt = -15
-            else:
-                send_tilt = tilt + 10
+            # if tilt + 10 > -15:
+            send_tilt = -15
+            # else:
+            #    send_tilt = tilt + 10
 
             kinect_pub.publish(send_tilt)
 
         elif message == "TILT_DOWN":
-            if tilt - 10 < -60:
-                send_tilt = -60
-            else:
-                send_tilt = tilt - 10
+            # if tilt - 10 < -60:
+            send_tilt = -63
+            # else:
+            #    send_tilt = tilt - 10
+
 
             kinect_pub.publish(send_tilt)
 
 
 
-def on_close(self):
-    print 'connection closed\n'
-
-
-application = tornado.web.Application([(r'/ws', WSHandler), ])
+    def on_close(self):
+        print 'connection closed\n'
+        clients.remove(self)
 
 
 def twist_listener(cmd_msg):
@@ -106,20 +120,33 @@ def tilt_angle_listener(angle):
         tilt = angle.data
 
 
+#global ws
+
+def nav_msgs_listener(msg):
+    send_to_all_clients(msg.data)
+    print "Received: ", msg.data
+    #send_to_all_clients("ROBOT LOST... Please help")
+
+
+application = tornado.web.Application([(r'/ws', WSHandler), ])
+
+
 if __name__ == "__main__":
     try:
+
         global heading
         heading = 0
 
-        rospy.init_node('websocket_server', anonymous=True)
+        rospy.init_node('websocket_server', anonymous=False)
 
         pub = rospy.Publisher('websocket_server_msgs', ros_string, queue_size=1)
-        loc_pub = rospy.Publisher('location_goal', ros_string, queue_size=1)
-        loc_update_pub = rospy.Publisher('trigger_location_save', ros_string, queue_size=1)
-        kinect_pub = rospy.Publisher('tilt_angle', ros_float, queue_size=1)
+        loc_pub = rospy.Publisher('/nri_system/location_goal', ros_string, queue_size=1)
+        loc_update_pub = rospy.Publisher('/nri_system/trigger_location_save', ros_string, queue_size=1)
+        kinect_pub = rospy.Publisher('/aux_systems/tilt_angle', ros_float, queue_size=1)
         rospy.Subscriber("/smooth_cmd_vel", Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
-        #rospy.Subscriber('/cmd_vel_mux/input/teleop', Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
-        rospy.Subscriber("/cur_tilt_angle", ros_float, tilt_angle_listener)  ###
+        rospy.Subscriber("/nav_msgs_pub", ros_string, nav_msgs_listener)  ### CHANGE TO SMOOTH_CMD_VEL
+        # rospy.Subscriber('/cmd_vel_mux/input/teleop', Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
+        rospy.Subscriber("/aux_systems/cur_tilt_angle", ros_float, tilt_angle_listener)  ###
 
         rospy.loginfo("Websocket server started")
 
