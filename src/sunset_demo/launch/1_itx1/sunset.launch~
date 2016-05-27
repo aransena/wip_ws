@@ -4,9 +4,7 @@
 
     <!-- itx1 startup (High Level: Navigation, HRI) -->
     <!-- roslaunch nodes on itx1 -->
-    <include file="$(find robot_2dnav)/launch/itx1_robot_configuration.launch"/> <!-- start
- navigation --> -->
-    <include file="$(find sunset_demo)/launch/1_itx1/usb_cams.launch"/>
+    <include file="$(find robot_2dnav)/launch/itx1_robot_configuration.launch"/> <!-- start navigation --> -->
    
     <!-- rosrun nodes on itx1 -->
     <node ns="aux_systems" pkg="web_video_server" type="web_video_server" name="web_video_server"
