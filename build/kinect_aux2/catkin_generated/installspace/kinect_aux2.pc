@@ -1,0 +1,8 @@
+prefix=/home/itx1/wip_ws/install
+
+Name: kinect_aux2
+Description: Description of kinect_aux2
+Version: 0.0.1
+Cflags: 
+Libs: -L/home/itx1/wip_ws/install/lib 
+Requires: roscpp sensor_msgs std_msgs

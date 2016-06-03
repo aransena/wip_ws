@@ -84,7 +84,7 @@ void publishState(void)
 	const int16_t accelerometer_x = (int16_t)ux;
 	const int16_t accelerometer_y = (int16_t)uy;
 	const int16_t accelerometer_z = (int16_t)uz;
-	const int8_t tilt_angle = (int8_t)buf[8];
+	const int16_t tilt_angle = (int8_t)buf[8];//int8_t buf[8]
 	const uint8_t tilt_status = buf[9];
 	
 	// publish IMU

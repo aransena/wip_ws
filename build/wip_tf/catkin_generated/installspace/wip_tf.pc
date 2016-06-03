@@ -1,0 +1,8 @@
+prefix=/home/itx1/wip_ws/install
+
+Name: wip_tf
+Description: Description of wip_tf
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/itx1/wip_ws/install/lib 
+Requires: 

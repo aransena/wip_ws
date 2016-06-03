@@ -1,0 +1,8 @@
+prefix=/home/itx1/wip_ws/devel
+
+Name: robot_router
+Description: Description of robot_router
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/itx1/wip_ws/devel/lib 
+Requires: 

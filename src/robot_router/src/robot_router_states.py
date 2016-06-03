@@ -179,7 +179,7 @@ rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
 #rospy.Subscriber("/nav_goal", Pose2D, callback_goal)
 rospy.Subscriber("/nri_system/location_goal", String, callback_location)
 rospy.Subscriber("/nri_system/control_level", Int8, callback_control_level)
-nav_msg_pub = rospy.Publisher('nav_msgs_pub', String, queue_size=1)
+nav_msg_pub = rospy.Publisher('/nav_msgs_pub', String, queue_size=1)
 
 #rospy.Subscriber("/move_base/feedback", MoveBaseActionFeedback, callback_curr_pos)
 #rospy.Subscriber("/move_base/current_goal", PoseStamped, callback_curr_goal)
