@@ -88,7 +88,7 @@ if __name__ == "__main__":
         rospy.loginfo("NRI Multiplexer Active")
 
 
-        rate = rospy.Rate(30) # 10hz
+        rate = rospy.Rate(100) # 10hz
         rospy.spin()
 
     except rospy.ROSInterruptException:

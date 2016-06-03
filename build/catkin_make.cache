@@ -1,0 +1,2 @@
+kinect_aux2:low_level_wip:network_comms:nri:robot_2dnav:robot_router:robot_setup_sensors:sunset_demo:tcd_fb2:template_ros:template_sm:tf_tree:websocket_server:wip_gazebo:wip_tf
+-DCATKIN_DEVEL_PREFIX=/home/itx1/wip_ws/devel -DCMAKE_INSTALL_PREFIX=/home/itx1/wip_ws/install -G Unix Makefiles

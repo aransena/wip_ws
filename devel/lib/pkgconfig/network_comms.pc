@@ -1,0 +1,8 @@
+prefix=/home/itx1/wip_ws/devel
+
+Name: network_comms
+Description: Description of network_comms
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/itx1/wip_ws/devel/lib 
+Requires: 

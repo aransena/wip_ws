@@ -32,7 +32,7 @@ def get_twist_msg(joy_data):
     data = Joy()
     data = joy_data
 
-    controlLevel = 0
+    controlLevel = 1
     controlLevel = math.fabs(int(round(pow(data.axes[5]-1,2)/4))) + math.fabs(int(round(pow(data.axes[2]-1,2)/4))) + data.buttons[4]+data.buttons[5]+1
 
 
@@ -83,7 +83,7 @@ def device_interface(data):
         if controlLevel==1:
             pub.publish(twist)
 
-        rate.sleep()
+ #       rate.sleep()
 
 
 
@@ -95,7 +95,7 @@ def get_active_device(data):
 def listener():
     global max_speed
     global max_rot
-    rospy.Subscriber("joy", Joy, device_interface)
+    rospy.Subscriber("/joy", Joy, device_interface)
 
 
     print rospy.myargv(argv=sys.argv)
@@ -124,10 +124,10 @@ if __name__ == "__main__":
 
         #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
 
-        pub = rospy.Publisher('cmd_vel', Twist, latch=True, queue_size=1)
+        pub = rospy.Publisher('/cmd_vel', Twist, latch=True, queue_size=1)
         control_request_pub = rospy.Publisher('mux/control_request', Int8, latch=True, queue_size=1)
         control_pub = rospy.Publisher('control_level', Int8,latch=False, queue_size=1)
-        rate = rospy.Rate(100) # 100hz
+#        rate = rospy.Rate(100) # 100hz
 
         # pub = rospy.Publisher('robbie/cmd_vel', Twist)
         # pub = rospy.Publisher('/turtle1/cmd_vel', Twist)

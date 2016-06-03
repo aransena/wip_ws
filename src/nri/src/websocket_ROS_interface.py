@@ -55,6 +55,8 @@ def get_twist_msg(data):
             beta = float(data['BETA'])
             bezelR = int(data['Clockwise'])
             bezelL = int(data['CounterClockwise'])
+	    turn = float(data['Turn'])
+	    mode = int(data['Mode'])
 
             if alpha < 5 and alpha > -5:
                 vel = float(beta) * -1
@@ -64,7 +66,7 @@ def get_twist_msg(data):
                 max_speed = 0.8
                 vel = (vel / 10) * max_speed
                 print "Heading: ", heading
-                if bezelR == 1:
+                if bezelR == 1 and mode == 1:
                     if heading > 0:
                         heading = 0
                     else:
@@ -73,7 +75,7 @@ def get_twist_msg(data):
                         else:
                             heading = -1
 
-                elif bezelL == 1:
+                elif bezelL == 1 and mode == 1:
                     if heading < 0:
                         heading = 0
                     else:
@@ -81,6 +83,8 @@ def get_twist_msg(data):
                             heading += 0.1
                         else:
                             heading = 1
+		if mode ==2:
+		    heading = turn
 
             if controlLevel != 1:
                 vel = 0
@@ -125,7 +129,7 @@ def device_interface(json_str):
         if controlLevel == 1:
             pub.publish(twist)
 
-        rate.sleep()
+ #       rate.sleep()
 
 
 def get_active_device(data):
@@ -150,7 +154,7 @@ if __name__ == "__main__":
         control_request_pub = rospy.Publisher('mux/control_request', Int8, latch=False, queue_size=1)
         # pub = rospy.Publisher('robbie/cmd_vel', Twist)
         # pub = rospy.Publisher('/turtle1/cmd_vel', Twist)
-        rate = rospy.Rate(50)  # 10hz
+#        rate = rospy.Rate(200)  # 10hz
 
         listener()
 

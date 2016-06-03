@@ -5,7 +5,7 @@
 import rospy
 from std_msgs.msg import String as ros_string
 from std_msgs.msg import Float64 as ros_float
-
+from std_msgs.msg import Int8
 from geometry_msgs.msg import Twist
 
 import tornado.httpserver
@@ -87,7 +87,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
         elif message == "TILT_UP":
             # if tilt + 10 > -15:
-            send_tilt = -15
+            send_tilt = -40
             # else:
             #    send_tilt = tilt + 10
 
@@ -102,6 +102,8 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
             kinect_pub.publish(send_tilt)
 
+	if "COLLISION" in message:
+	    collision_pub.publish(1)
 
 
     def on_close(self):
@@ -143,6 +145,7 @@ if __name__ == "__main__":
         loc_pub = rospy.Publisher('/nri_system/location_goal', ros_string, queue_size=1)
         loc_update_pub = rospy.Publisher('/nri_system/trigger_location_save', ros_string, queue_size=1)
         kinect_pub = rospy.Publisher('/aux_systems/tilt_angle', ros_float, queue_size=1)
+	collision_pub = rospy.Publisher('/nri_system/collision', Int8, queue_size=1)
         rospy.Subscriber("/smooth_cmd_vel", Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
         rospy.Subscriber("/nav_msgs_pub", ros_string, nav_msgs_listener)  ### CHANGE TO SMOOTH_CMD_VEL
         # rospy.Subscriber('/cmd_vel_mux/input/teleop', Twist, twist_listener)  ### CHANGE TO SMOOTH_CMD_VEL
