@@ -124,7 +124,7 @@ if __name__ == "__main__":
 
         #pub = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist)
 
-        pub = rospy.Publisher('cmd_vel', Twist, latch=True, queue_size=1)
+        pub = rospy.Publisher('/cmd_vel', Twist, latch=True, queue_size=1)
         control_request_pub = rospy.Publisher('mux/control_request', Int8, latch=True, queue_size=1)
         control_pub = rospy.Publisher('control_level', Int8,latch=False, queue_size=1)
         rate = rospy.Rate(100) # 100hz

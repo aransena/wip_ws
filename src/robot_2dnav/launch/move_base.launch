@@ -14,7 +14,6 @@
 		<param name="controller_frequency" value="50" type="double"/>
 		<param name="planner_frequency" value="5"/>
 		<param name="oscillation_reset_dist" value="0.01" type="double"/>
-		<remap from="cmd_vel" to="nri_system/cmd_vel"/>
 	</node>
 
 	

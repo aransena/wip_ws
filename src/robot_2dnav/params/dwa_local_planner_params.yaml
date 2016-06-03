@@ -55,3 +55,4 @@ DWAPlannerROS:
 
 # Differential-drive robot configuration - necessary?
 #  holonomic_robot: false
+  transform_tolerance: 0.8
