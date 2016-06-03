@@ -1,8 +1,0 @@
-prefix=/home/itx1/wip_ws/devel
-
-Name: template_ros
-Description: Description of template_ros
-Version: 0.0.0
-Cflags: -I/home/itx1/wip_ws/devel/include
-Libs: -L/home/itx1/wip_ws/devel/lib 
-Requires: message_runtime

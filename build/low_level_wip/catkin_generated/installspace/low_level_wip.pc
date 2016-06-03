@@ -1,8 +1,0 @@
-prefix=/home/itx1/wip_ws/install
-
-Name: low_level_wip
-Description: Description of low_level_wip
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/itx1/wip_ws/install/lib 
-Requires: 

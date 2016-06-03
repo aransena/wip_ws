@@ -1,8 +1,0 @@
-prefix=/home/itx1/wip_ws/devel
-
-Name: robot_setup_sensors
-Description: Description of robot_setup_sensors
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/itx1/wip_ws/devel/lib 
-Requires: 

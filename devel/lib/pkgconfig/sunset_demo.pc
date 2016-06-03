@@ -1,8 +1,0 @@
-prefix=/home/itx1/wip_ws/devel
-
-Name: sunset_demo
-Description: Description of sunset_demo
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/itx1/wip_ws/devel/lib 
-Requires: 
