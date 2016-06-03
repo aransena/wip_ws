@@ -3,11 +3,7 @@
     <param name="video_device" value="/dev/video1" />
     <param name="image_width" value="640" />
     <param name="image_height" value="480" />
-<<<<<<< HEAD
     <param name="pixel_format" value="yuyv" />
-=======
-    <param name="pixel_format" value="mjpeg" />
->>>>>>> 1d72074f2ec54f95b4347734512403e3180e5779
     <param name="camera_frame_id" value="usb_cam" />
     <param name="io_method" value="mmap"/>
   </node>
