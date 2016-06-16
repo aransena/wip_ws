@@ -201,10 +201,12 @@ def wheelsOdomSendCmd():
 				left = x - th * wheelBase/ 2.0
 				right = x + th * wheelBase / 2.0
 
-
-
-			left=int(left*metersToTicks)
-			right=int(right*metersToTicks)
+			try:
+				left=int(left*metersToTicks)
+				right=int(right*metersToTicks)
+			except:
+				left = 0
+				right = 0
 			
 			
 			
