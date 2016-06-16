@@ -9,9 +9,9 @@ global_costmap:
   height: 100
   origin_x: -50
   origin_y: -50
-  robot_radius: 0.25
-  inflation_radius: 40.0
-  cost_scaling_factor: 20.0
+  robot_radius: 0.01
+  inflation_radius: 24.0
+  cost_scaling_factor: 11.0
   transform_tolerance: 10.0
   static_layer:
     enabled: true
