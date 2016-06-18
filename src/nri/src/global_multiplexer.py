@@ -67,11 +67,9 @@ def control_request(data):
         timer.cancel() # Cancel timeout, current device active
         timer.start() # Restart timeout check
     else:
+        # Timeout keeps running, active device or higher priority device yet to report in
         log_str = "Device " + str(request_device) + " superceded by current active device, " + "device " + str(active_device)
         rospy.loginfo(log_str)
-        # Timeout keeps running, active device or higher priority device yet to report in
-
-
 
     pub.publish(active_device)
     rate.sleep()
@@ -83,10 +81,8 @@ if __name__ == "__main__":
         rospy.init_node('nri_multiplexer', anonymous=True)
         pub = rospy.Publisher('mux/active_device', Int8, latch=True, queue_size=1)
         rospy.Subscriber("mux/control_request", Int8, control_request)
-
         timer = ControlTimeout(5, control_timeout)
         rospy.loginfo("NRI Multiplexer Active")
-
 
         rate = rospy.Rate(100) # 10hz
         rospy.spin()

@@ -55,8 +55,8 @@ def get_twist_msg(data):
             beta = float(data['BETA'])
             bezelR = int(data['Clockwise'])
             bezelL = int(data['CounterClockwise'])
-	    turn = float(data['Turn'])
-	    mode = int(data['Mode'])
+            turn = float(data['Turn'])
+            mode = int(data['Mode'])
 
             if alpha < 5 and alpha > -5:
                 vel = float(beta) * -1
@@ -83,8 +83,8 @@ def get_twist_msg(data):
                             heading += 0.1
                         else:
                             heading = 1
-		if mode ==2:
-		    heading = turn
+            if mode == 2:
+                heading = turn
 
             if controlLevel != 1:
                 vel = 0
