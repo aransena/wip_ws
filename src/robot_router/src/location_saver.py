@@ -29,7 +29,8 @@ def callback_curr_pos(data):
     quaternion = (orientation.x,orientation.y,orientation.z,orientation.w)
 
     euler = tf.transformations.euler_from_quaternion(quaternion)
-    location.theta=euler[2]
+#    location.theta=euler[2]
+    location.theta = quaternion
     #print location.x, location.y, location.theta
     #print math.degrees(euler[2])
 

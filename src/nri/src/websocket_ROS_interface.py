@@ -13,6 +13,7 @@ controlLevel = 0
 requestLevel = 0
 active_device = 0
 
+
 TABLET_DEVICE_LEVEL = 4
 SMARTPHONE_DEVICE_LEVEL = 3
 WATCH_DEVICE_LEVEL = 2

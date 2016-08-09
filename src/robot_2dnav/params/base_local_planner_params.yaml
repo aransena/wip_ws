@@ -14,8 +14,8 @@ TrajectoryPlannerROS:
   occdist_scale: 0.5
   vx_samples: 50
   vtheta_samples: 50
-  heading_lookahead: 3.0  
+  heading_lookahead: 1.0
   holonomic_robot: false
-  yaw_goal_tolerance: 1.0
-  xy_goal_tolerance: 0.3
+  yaw_goal_tolerance: 0.5#1.0
+  xy_goal_tolerance: 0.1
   transform_tolerance: 0.8

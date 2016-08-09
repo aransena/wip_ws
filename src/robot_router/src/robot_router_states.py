@@ -107,10 +107,16 @@ def callback_location(data):
         goal.target_pose.pose.position.x = location['X']
         goal.target_pose.pose.position.y = location['Y']
 
-        radians = math.radians(location['Theta'])
-        quaternion = tf.transformations.quaternion_from_euler(0, 0, radians) # roll, pitch, yaw
+        #radians = math.radians(location['Theta'])
+        #quaternion = tf.transformations.quaternion_from_euler(0, 0, radians) # roll, pitch, yaw
 
-        goal.target_pose.pose.orientation.x = quaternion[0]
+        #goal.target_pose.pose.orientation.x = quaternion[0]
+        #goal.target_pose.pose.orientation.y = quaternion[1]
+        #goal.target_pose.pose.orientation.z = quaternion[2]
+        #goal.target_pose.pose.orientation.w = quaternion[3]
+	quaternion = location['Theta']
+#	goal.target_pose.pose.orientation = quaternion
+	goal.target_pose.pose.orientation.x = quaternion[0]
         goal.target_pose.pose.orientation.y = quaternion[1]
         goal.target_pose.pose.orientation.z = quaternion[2]
         goal.target_pose.pose.orientation.w = quaternion[3]
